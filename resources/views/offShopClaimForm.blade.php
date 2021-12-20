@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/jpg" href="{{ asset('assets/img/logo.png') }}" />
-    <title>Home Claim Form</title>
+    <title>Off/Shop Claim Form</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css') }}" media="all" />
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/fontawesome.min.css') }}" media="all" />
@@ -33,7 +33,7 @@
                     <img src="{{ asset('assets/img/logo2.png') }}" alt="" />
                 </div>
                 <div class="col-md-8 text-center">
-                    <h2 class="blue margin-top-20">Home Claim Form</h2>
+                    <h2 class="blue margin-top-20">Off/Shop Claim Form</h2>
                 </div>
                 <div class="col-md-2 right-nav">
                     <ul class="nav">
@@ -66,7 +66,7 @@
                 </div>
                 <div class="col-md-2 tab-heading-item">
                     <button data-id="lossDamage" class="tab-heading-btn">
-                        Loss / damage to Home / Household Content / Home Buildings
+                        Loss or damaged to Contents / Stock
                     </button>
                 </div>
                 <div class="col-md-2 tab-heading-item">
@@ -162,11 +162,19 @@
                         <div class="row form-single margin-top-10">
                             <div class="col-md-4">Select claim types</div>
                             <div class="col-md-5">
-                                <input type="checkbox" name="claim_types[]" value="loss">Loss / damage to Home /
-                                Household Content / Home Buildings <br>
-                                <input type="checkbox" name="claim_types[]" value="personal">Personal / Public Liability
+                                <input type="checkbox" name="claim_types[]" value="loss">Loss or damage to Contents /
+                                Stock <br>
+                                <input type="checkbox" name="claim_types[]" value="business_interruption">Business
+                                Interruption <br>
+                                <input type="checkbox" name="claim_types[]" value="loss_of_money">Loss of Money <br>
+                                <input type="checkbox" name="claim_types[]" value="public_liability">Public Liability
                                 <br>
-                                <input type="checkbox" name="claim_types[]" value="others">Others. <br>
+                                <input type="checkbox" name="claim_types[]" value="personal_assault">Personal Assault
+                                <br>
+                                <input type="checkbox" name="claim_types[]" value="plate_glass">Plate Glass <br>
+                                <input type="checkbox" name="claim_types[]" value="employee_compensation">Employee's
+                                Compensation <br>
+                                <input type="checkbox" name="claim_types[]" value="others">Others <br>
                             </div>
                         </div>
 
@@ -197,6 +205,7 @@
                                 in case of theft or burglary loss? </div>
                             <div class="col-md-5">
                                 <input type="checkbox" name="q1[]" value="yes"> Yes, please state how did the culprit(s)
+                                enter the premises.
                                 enter the premises. <br>
                                 <input type="checkbox" name="q1[]" value="no">No <br>
                                 <input type="checkbox" name="q1[]" value="not_applicable">Not applicable <br>
@@ -205,7 +214,7 @@
 
                         <div class="row form-single margin-top-20">
                             <div class="col-md-4">Q2 : Has/ Will the incident been reported/ be reported to the
-                                local police/ management office/ any other responsible party? </div>
+                                local police/ management office/ any other Authorit(ies)/ part(ies)?</div>
                             <div class="col-md-5">
                                 <input type="checkbox" name="q2[]" value="yes"> Yes, please state details (e.g. police
                                 report number, etc) <br>
@@ -232,37 +241,11 @@
                         </div>
 
                         <div class="row form-single margin-top-20">
-                            <div class="col-md-4">Q5 : Are you the occupier of the Insured Premises?</div>
-                            <div class="col-md-5">
-                                <input type="checkbox" name="q5[]" value="yes"> Yes<br>
-                                <input type="checkbox" name="q5[]" value="no">No <br>
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-20">
-                            <div class="col-md-4">Q6 : Were the insured premises being occupied at the time of
-                                incident?</div>
-                            <div class="col-md-5">
-                                <input type="checkbox" name="q6[]" value="yes"> Yes<br>
-                                <input type="checkbox" name="q6[]" value="no">No <br>
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-20">
-                            <div class="col-md-4">Q7 : Is/Are the Insured propert(ies) subject to any Hire
-                                Purchase or Loan Agreement?</div>
-                            <div class="col-md-5">
-                                <input type="checkbox" name="q7[]" value="yes"> Yes, please state details<br>
-                                <input type="checkbox" name="q7[]" value="no">No <br>
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-20">
-                            <div class="col-md-4">Q8 : Are the Insured also insured with any other insurance for
+                            <div class="col-md-4">Q5 : Are the Insured also insured with any other insurance for
                                 the Insured propert(ies) as a result of the same incident? </div>
                             <div class="col-md-5">
-                                <input type="checkbox" name="q8[]" value="yes"> Yes, please state details<br>
-                                <input type="checkbox" name="q8[]" value="no">No <br>
+                                <input type="checkbox" name="q5[]" value="yes"> Yes, please state details<br>
+                                <input type="checkbox" name="q5[]" value="no">No <br>
                             </div>
                         </div>
 
@@ -274,9 +257,9 @@
                 <div id="lossDamage" class="tab-content-single dispaly-none">
                     <h3 class="form-heading margin-top-20 blue">Details of damaged or lost properties</h3>
                     <div class="form-detailss margin-top-20">
-
                         <table class="table table-bordered">
                             <thead>
+                                <th>Serial</th>
                                 <th>Description of property</th>
                                 <th>
                                     Date of purchase or installation
@@ -330,7 +313,57 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
 
+                    <h3 class="form-heading margin-top-20 blue">Details of other claim item(s)</h3>
+                    <div class="form-detailss margin-top-20">
+                        <table class="table table-bordered">
+                            <thead>
+                                <th>Serial</th>
+                                <th>Description of item</th>
+                                <th>
+                                    Reason of cost(s) / expense(s) incurred
+                                </th>
+                                <th>
+                                    Date of purchase or installation
+                                    (DDMMYYYY)
+                                </th>
+                                <th>
+                                    Claim amount
+                                    (HK$)
+                                </th>
+                                <th>
+                                    Total
+                                    (HK$)
+                                </th>
+                                <th>
+                                    Acction
+                                </th>
+                            </thead>
+                            <tbody id="lossDamageTbodyItem">
+                                <tr id="1">
+                                    <td class="text-center initial-serial">1</td>
+                                    <td>
+                                        <input type="text" name="loss_damage_item_description[]" placeholder="">
+                                    </td>
+                                    <td>
+                                        <input type="text" name="loss_damage_item_reason_cost[]" placeholder="">
+                                    </td>
+                                    <td>
+                                        <input type="text" name="loss_damage_item_purchage_date[]" placeholder="">
+                                    </td>
+                                    <td>
+                                        <input type="text" name="loss_damage_item_claim_amount[]" placeholder="">
+                                    </td>
+                                    <td>
+                                        <input type="text" name="loss_damage_item_total[]" placeholder="">
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-success add-btn_item">Add</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 {{-- Loss / damage to Home --}}
@@ -592,6 +625,38 @@
             });
             //row remove
             $(document).on('click', '.remove', function() {
+                $(this).parent().parent().remove();
+                slCounter();
+            });
+
+//row add
+            var rowId = 1;
+            $('.add-btn-item').on('click', function() {
+                $('#lossDamageTbodyItem').append(`<tr id="">
+                    <td class="text-center initial-serial">1</td>
+                                    <td>
+                                        <input type="text" name="loss_damage_item_description[]" placeholder="">
+                                    </td>
+                                    <td>
+                                        <input type="text" name="loss_damage_item_reason_cost[]" placeholder="">
+                                    </td>
+                                    <td>
+                                        <input type="text" name="loss_damage_item_purchage_date[]" placeholder="">
+                                    </td>
+                                    <td>
+                                        <input type="text" name="loss_damage_item_claim_amount[]" placeholder="">
+                                    </td>
+                                    <td>
+                                        <input type="text" name="loss_damage_item_total[]" placeholder="">
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-danger remove-item"type="button">Remove</button>
+                                    </td>
+                                </tr>`);
+                slCounter();
+            });
+            //row remove
+            $(document).on('click', '.remove-item', function() {
                 $(this).parent().parent().remove();
                 slCounter();
             });
