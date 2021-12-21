@@ -19,8 +19,11 @@ Route::get('/', function () {
 Route::get('/claim', function () {
     return view('claim');
 });
-Route::get('/home-claim-form', function () {
+Route::get('/employee-claim-form', function () {
     return view('homeClaimForm');
+});
+Route::get('/employee-claim-form', function () {
+    return view('employeeClaimForm');
 });
 Route::get('/off-shop-claim-form', function () {
     return view('offShopClaimForm');

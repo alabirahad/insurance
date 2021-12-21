@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/jpg" href="{{ asset('assets/img/logo.png') }}" />
-    <title>Office/Shop Claim Form</title>
+    <title>Employee Claim Form</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css') }}" media="all" />
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/fontawesome.min.css') }}" media="all" />
@@ -33,7 +33,7 @@
                     <img src="{{ asset('assets/img/logo2.png') }}" alt="" />
                 </div>
                 <div class="col-md-8 text-center">
-                    <h2 class="blue margin-top-20">Office/Shop Claim Form</h2>
+                    <h2 class="blue margin-top-20">Employee Claim Form</h2>
                 </div>
                 <div class="col-md-2 right-nav">
                     <ul class="nav">
@@ -65,18 +65,18 @@
                     </button>
                 </div>
                 <div class="col-md-2 tab-heading-item">
-                    <button data-id="lossDamage" class="tab-heading-btn">
-                        Loss or damaged to Contents / Stock
+                    <button data-id="compensationAccidentRepatriation" class="tab-heading-btn">
+                    Employee's Compensation, Personal Accident, Repatriation
                     </button>
                 </div>
                 <div class="col-md-2 tab-heading-item">
-                    <button data-id="lossLiabilityPersonal" class="tab-heading-btn">
-                        Loss of Money, Public Liability, Personal Assault
+                    <button data-id="clinicalSurgicalDental" class="tab-heading-btn">
+                        Clinical Expenses, Surgical & Hospitalization Expense, Dental Expenses
                     </button>
                 </div>
                 <div class="col-md-2 tab-heading-item">
-                    <button data-id="othersClaim" class="tab-heading-btn">
-                        Plate Glass, Employee's Compensation , Others Claim Information
+                    <button data-id="cashAllowanceReplacement" class="tab-heading-btn">
+                        Loss of Services Cash Allowance, Replacement of Helper Expenses
                     </button>
                 </div>
                 <div class="col-md-2 tab-heading-item">
@@ -158,6 +158,14 @@
                 <div id="genaralClaim" class="tab-content-single dispaly-none ">
                     <h3 class="form-heading margin-top-20 blue">Claim Information</h3>
                     <div class="form-detailss margin-top-20">
+
+                        <div class="row form-single margin-top-10">
+                            <div class="col-md-4">Are the claimant/Insured person also insured with any other insurance for the Insured person as a result of the same incident? </div>
+                            <div class="col-md-5">
+                                <input type="checkbox" name="claimant_person_injured[]" value="yes">Yes, please state details<br>
+                                <input type="checkbox" name="claimant_person_injured[]" value="no">No<br>
+                            </div>
+                        </div>
 
                         <div class="row form-single margin-top-10">
                             <div class="col-md-4">Select claim types</div>
@@ -253,406 +261,10 @@
                 </div>
                 <!-- claim Information -->
 
-                {{-- Loss / damage to Home --}}
-                <div id="lossDamage" class="tab-content-single dispaly-none">
-                    <h3 class="form-heading margin-top-20 blue">Details of damaged or lost properties</h3>
-                    <div class="form-detailss margin-top-20">
-                        <table class="table table-bordered">
-                            <thead>
-                                <th>Serial</th>
-                                <th>Description of property</th>
-                                <th>
-                                    Date of purchase or installation
-                                    (DDMMYYYY)
-                                </th>
-                                <th>
-                                    Original
-                                    purchase price
-                                    (HK$)
-                                </th>
-                                <th>
-                                    Repair / Replacement cost (if applicable)
-                                    (HK$)
-                                </th>
-                                <th>
-                                    Claim amount
-                                    (HK$)
-                                </th>
-                                <th>
-                                    Total
-                                    (HK$)
-                                </th>
-                                <th>
-                                    Acction
-                                </th>
-                            </thead>
-                            <tbody id="lossDamageTbody">
-                                <tr id="1">
-                                    <td class="text-center initial-serial">1</td>
-                                    <td>
-                                        <input type="text" name="loss_damage_property_description[]" placeholder="">
-                                    </td>
-                                    <td>
-                                        <input type="text" name="loss_damage_purchage_date[]" placeholder="">
-                                    </td>
-                                    <td>
-                                        <input type="text" name="loss_damage_purchage_price[]" placeholder="">
-                                    </td>
-                                    <td>
-                                        <input type="text" name="loss_damage_repair_cost[]" placeholder="">
-                                    </td>
-                                    <td>
-                                        <input type="text" name="loss_damage_claim_amount[]" placeholder="">
-                                    </td>
-                                    <td>
-                                        <input type="text" name="loss_damage_total[]" placeholder="">
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-success add-btn">Add</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <!-- compensationAccidentRepatriation -->
+                <div id="compensationAccidentRepatriation" class="tab-content-single dispaly-none">
 
-                    <h3 class="form-heading margin-top-20 blue">Details of other claim item(s)</h3>
-                    <div class="form-detailss margin-top-20">
-                        <table class="table table-bordered">
-                            <thead>
-                                <th>Serial</th>
-                                <th>Description of item</th>
-                                <th>
-                                    Reason of cost(s) / expense(s) incurred
-                                </th>
-                                <th>
-                                    Date of purchase or installation
-                                    (DDMMYYYY)
-                                </th>
-                                <th>
-                                    Claim amount
-                                    (HK$)
-                                </th>
-                                <th>
-                                    Total
-                                    (HK$)
-                                </th>
-                                <th>
-                                    Acction
-                                </th>
-                            </thead>
-                            <tbody id="lossDamageTbodyItem">
-                                <tr id="1">
-                                    <td class="text-center initial-serial">1</td>
-                                    <td>
-                                        <input type="text" name="loss_damage_item_description[]" placeholder="">
-                                    </td>
-                                    <td>
-                                        <input type="text" name="loss_damage_item_reason_cost[]" placeholder="">
-                                    </td>
-                                    <td>
-                                        <input type="text" name="loss_damage_item_purchage_date[]" placeholder="">
-                                    </td>
-                                    <td>
-                                        <input type="text" name="loss_damage_item_claim_amount[]" placeholder="">
-                                    </td>
-                                    <td>
-                                        <input type="text" name="loss_damage_item_total[]" placeholder="">
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-success add-btn-item">Add</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <div class="row form-single margin-top-40">
-                            <div class="col-md-4">Total claimed amount :</div>
-                            <div class="col-md-5">
-                                <input type="text" name="loss_damage_total_claimed_amount" placeholder="">
-                            </div>
-                        </div>
-                        <div class="row form-single margin-top-20">
-                            <div class="col-md-4">Upload (if any applicable) :</div>
-                            <div class="col-md-5">
-                                <input type="file" name="loss_damage_uploaded_file" placeholder="">
-                            </div>
-                        </div>
-                        <div class="row form-single margin-top-20">
-                            <div class="col-md-11 red">Note to Insured: All supporting document(s) should be submitted
-                                within 12 months from the date of incident, otherwise the right of claim shall be
-                                therefore forfeited. All original supporting documents should be properly kept.</div>
-
-                        </div>
-                    </div>
-
-
-                    <h3 class="form-heading margin-top-20 blue">Business Interruption</h3>
-                    <div class="form-detailss margin-top-20">
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Period of Business Interruption :</div>
-                            <div class="col-md-5">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="">From</span>
-                                    </div>
-                                    <input type="date" name="business_interruption_period_from" class="form-control">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="">To</span>
-                                    </div>
-                                    <input type="date" name="business_interruption_period_to" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-
-                        <h3 class="form-heading margin-top-20 blue">Details of fee / additional expenditure</h3>
-                        <div class="form-detailss margin-top-20">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <th>Serial</th>
-                                    <th>Description of fee / additional expenditure</th>
-                                    <th>
-                                        Reason of fee / additional expenditure incurred
-                                    </th>
-                                    <th>
-                                        Date of fee / additional expenditure incurred
-                                        (DDMMYYYY)
-                                    </th>
-                                    <th>
-                                        Claim amount
-                                        (HK$)
-                                    </th>
-                                    <th>
-                                        Total
-                                        (HK$)
-                                    </th>
-                                    <th>
-                                        Acction
-                                    </th>
-                                </thead>
-                                <tbody id="businessInterruptionTbody">
-                                    <tr id="1">
-                                        <td class="text-center initial-serial">1</td>
-                                        <td>
-                                            <input type="text" name="business_interruption_description[]"
-                                                placeholder="">
-                                        </td>
-                                        <td>
-                                            <input type="text" name="business_interruption_reason_cost[]"
-                                                placeholder="">
-                                        </td>
-                                        <td>
-                                            <input type="text" name="business_interruption_date[]" placeholder="">
-                                        </td>
-                                        <td>
-                                            <input type="text" name="business_interruption_claim_amount[]"
-                                                placeholder="">
-                                        </td>
-                                        <td>
-                                            <input type="text" name="business_interruption_item_total[]" placeholder="">
-                                        </td>
-                                        <td>
-                                            <button type="button"
-                                                class="btn btn-success add-btn-business-interruption">Add</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="row form-single margin-top-20">
-                                <div class="col-md-4">Upload (if any applicable) :</div>
-                                <div class="col-md-5">
-                                    <input type="file" name="business_interruption_uploaded_file" placeholder="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                {{-- Loss / damage to Home --}}
-
-                <!-- lossLiabilityPersonal -->
-                <div id="lossLiabilityPersonal" class="tab-content-single dispaly-none">
-                    <h3 class="form-heading margin-top-20 blue">Loss of Money</h3>
-                    <div class="form-detailss margin-top-20">
-
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Reason of claim:</div>
-                            <div class="col-md-5">
-                                <textarea id="loss_money_resons_claim" name="loss_money_resons_claim"
-                                    rows="4"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Total claimed amount:</div>
-                            <div class="col-md-5">
-                                <input type="text" name="loss_money_claim_amount" placeholder="">
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-20">
-                            <div class="col-md-4">Upload (if any applicable) :</div>
-                            <div class="col-md-5">
-                                <input type="file" name="loss_money_uploaded_file" placeholder="">
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <h3 class="form-heading margin-top-20 blue">Public Liability </h3>
-                    <h3 class="form-heading margin-top-20 blue">Damage to property of other(s) </h3>
-                    <div class="form-detailss margin-top-20">
-
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Name of property owner:</div>
-                            <div class="col-md-5">
-                                <input type="text" name="public_liability_owner_name" placeholder="">
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Details & extent of damage to Property of other(s): </div>
-                            <div class="col-md-5">
-                                <textarea id="public_liability_detaile_damage" name="public_liability_detaile_damage"
-                                    rows="4"></textarea>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <h3 class="form-heading margin-top-20 blue">Injury to other(s)</h3>
-                    <div class="form-detailss margin-top-20">
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Name of the injured:</div>
-                            <div class="col-md-5">
-                                <input type="text" name="injured_name" placeholder="">
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Details & extent of injury of other(s): </div>
-                            <div class="col-md-5">
-                                <textarea id="dinjury_description" name="dinjury_description" rows="4"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-20">
-                            <div class="col-md-4">Q1 : Was/Were other wrongdoer(s) involved in the same incident?
-                            </div>
-                            <div class="col-md-5">
-                                <input type="checkbox" name="laiabilityq1[]" value="yes"> Yes, please state the name(s),
-                                address(es) & telephone No.(s) of the wrongdoer(s)<br>
-                                <input type="checkbox" name="laiabilityq1[]" value="no">No <br>
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-20">
-                            <div class="col-md-4">Q2 : Has any communication, verbal or written, been made to you
-                                by or on behalf of any injured or owner(s) of the damaged property? </div>
-                            <div class="col-md-5">
-                                <input type="checkbox" name="laiabilityq2[]" value="yes"> Yes, please give particulars
-                                (any written communication being received must be forwarded to us immediately unanswered
-                                for our handling)<br>
-                                <input type="checkbox" name="laiabilityq2[]" value="no">No <br>
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-20">
-                            <div class="col-md-4">Q3 : Has any step been taken to compromise or settle the
-                                matter?</div>
-                            <div class="col-md-5">
-                                <input type="checkbox" name="laiabilityq3[]" value="yes"> Yes, please state the nature
-                                and by whom it was carried out with any compensation amount and withhold any further
-                                communication with any involved part(ies).<br>
-                                <input type="checkbox" name="laiabilityq3[]" value="no">No <br>
-                            </div>
-                        </div>
-
-
-                        <div class="row form-single margin-top-20">
-                            <div class="col-md-4">Q3 : Has any step been taken to compromise or settle the
-                                matter?</div>
-                            <div class="col-md-5">
-                                <input type="checkbox" name="laiabilityq3[]" value="yes"> Yes, please state the nature
-                                and by whom it was carried out with any compensation amount and withhold any further
-                                communication with any involved part(ies).<br>
-                                <input type="checkbox" name="laiabilityq3[]" value="no">No <br>
-                            </div>
-                        </div>
-
-
-                        <div class="row form-single margin-top-20">
-                            <div class="col-md-4">Upload (if any applicable)</div>
-                            <div class="col-md-5">
-                                <input type="file" name="injured_file" id="">
-                            </div>
-                        </div>
-                    </div>
-
-                    <h3 class="form-heading margin-top-20 blue">Personal Assault</h3>
-                    <div class="form-detailss margin-top-20">
-
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Name of injured employee:</div>
-                            <div class="col-md-5">
-                                <input type="text" name="personal_assault_name" placeholder="">
-                            </div>
-                        </div>
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Name of Claimant:</div>
-                            <div class="col-md-5">
-                                <input type="text" name="personal_assault_name_claimant" placeholder="">
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Reason of Claims:</div>
-                            <div class="col-md-5">
-                                <textarea id="personal_assault_reason" name="personal_assault_reason"
-                                    rows="4"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-20">
-                            <div class="col-md-4">Upload (if any applicable) :</div>
-                            <div class="col-md-5">
-                                <input type="file" name="personal_assault_uploaded_file" placeholder="">
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-                <!-- lossLiabilityPersonal -->
-
-                <!-- others -->
-                <div id="othersClaim" class="tab-content-single dispaly-none">
-                    <h3 class="form-heading margin-top-20 blue">Plate Glass</h3>
-                    <div class="form-detailss margin-top-20">
-
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Reason of claim:</div>
-                            <div class="col-md-5">
-                                <textarea id="plate_glass_resons_claim" name="plate_glass_resons_claim"
-                                    rows="4"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Total claimed amount:</div>
-                            <div class="col-md-5">
-                                <input type="text" name="plate_glass_claim_amount" placeholder="">
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-20">
-                            <div class="col-md-4">Upload (if any applicable) :</div>
-                            <div class="col-md-5">
-                                <input type="file" name="plate_glass_uploaded_file" placeholder="">
-                            </div>
-                        </div>
-                    </div>
-
-                    <h3 class="form-heading margin-top-20 blue">Employee's Compensation </h3>
+                    <h3 class="form-heading margin-top-20 blue">Employee's Compensation (Benefit 1) </h3>
                     <div class="form-detailss margin-top-20">
                         <h3 class="form-heading margin-top-20 blue">Important Notes </h3>
                         <div class="row form-single margin-top-10">
@@ -728,26 +340,296 @@
                         </div>
                     </div>
 
-                    <h3 class="form-heading margin-top-20 blue">Others </h3>
+                    <h3 class="form-heading margin-top-20 blue">Personal Accident (Benefit 2) </h3>
                     <div class="form-detailss margin-top-20">
 
                         <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Reason of claim:</div>
+                            <div class="col-md-4">Date of injury:</div>
                             <div class="col-md-5">
-                                <textarea id="resons_claim" name="resons_claim" rows="4"></textarea>
+                                <input type="text" name="personal_accident_injury_date" placeholder="">
                             </div>
                         </div>
 
                         <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Total claimed amount:</div>
+                            <div class="col-md-4">Description of incident:</div>
                             <div class="col-md-5">
-                                <input type="text" name="claim_amount" placeholder="">
+                                <textarea id="personal_accident_incident_description" name="personal_accident_incident_description"
+                                    rows="4"></textarea>
+                            </div>
+                        </div>
+                        <div class="row form-single margin-top-10">
+                            <div class="col-md-4">Sick leave: </div>
+                            <div class="col-md-5">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="">From</span>
+                                    </div>
+                                    <input type="date" name="personal_accident_sick_leave_from" class="form-control">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="">To</span>
+                                    </div>
+                                    <input type="date" name="personal_accident_sick_leave_to" class="form-control">
+                                </div>
                             </div>
                         </div>
 
+                        <div class="row form-single margin-top-10">
+                            <div class="col-md-4">Nature of injury:</div>
+                            <div class="col-md-5">
+                                <textarea id="personal_accident_injury_nature" name="personal_accident_injury_nature"
+                                    rows="4"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row form-single margin-top-10">
+                            <div class="col-md-4">Is the Insured person fully recovered? </div>
+                            <div class="col-md-5">
+                                <input type="checkbox" name="personal_accident_recoverd[]" value="yes"><br>
+                                <input type="checkbox" name="personal_accident_recoverd[]" value="no">No, please state details, e.g. what medical treatment(s) will be received & how long the sick leave being granted:<br>
+                            </div>
+                        </div>
+
+                        <div class="row form-single margin-top-20">
+                            <div class="col-md-4">Upload (if any applicable) :</div>
+                            <div class="col-md-5">
+                                <input type="file" name="personal_accident_uploaded_file" placeholder="">
+                            </div>
+                        </div>
                     </div>
+
+                    <h3 class="form-heading margin-top-20 blue">Repatriation (Benefit 2) </h3>
+                    <h3 class="form-heading margin-top-20 blue">Date of Death / Serious Sickness / Injury</h3>
+                    <div class="form-detailss margin-top-20">
+
+                        <div class="row form-single margin-top-10">
+                            <div class="col-md-4">Description of incident:</div>
+                            <div class="col-md-5">
+                                <textarea id="repatriation_incident_description" name="repatriation_incident_description"
+                                    rows="4"></textarea>
+                            </div>
+                        </div>
+                        <div class="row form-single margin-top-10">
+                            <div class="col-md-4">Reasons of Injury:</div>
+                            <div class="col-md-5">
+                                <textarea id="repatriation_reason" name="repatriation_reason"
+                                    rows="4"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row form-single margin-top-10">
+                            <div class="col-md-4">Is the Insured person fully recovered? </div>
+                            <div class="col-md-5">
+                                <input type="checkbox" name="repatriation_recoverd[]" value="yes"><br>
+                                <input type="checkbox" name="repatriation_recoverd[]" value="no">No, please state details, e.g. what medical treatment(s) will be received & how long the sick leave being granted:<br>
+                            </div>
+                        </div>
+
+                        <div class="row form-single margin-top-20">
+                            <div class="col-md-4">Upload (if any applicable) :</div>
+                            <div class="col-md-5">
+                                <input type="file" name="repatriation_uploaded_file" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
-                <!-- others -->
+                <!-- compensationAccidentRepatriation -->
+
+                <!-- clinicalSurgicalDental -->
+                <div id="compensationAccidentRepatriation" class="tab-content-single dispaly-none">
+
+                    <h3 class="form-heading margin-top-20 blue">Clinical Expenses (Benefit 4)</h3>
+                    <div class="form-detailss margin-top-20">
+
+                        <div class="row form-single margin-top-10">
+                            <div class="col-md-4">Date of Medical Consulation:</div>
+                            <div class="col-md-5">
+                                <input type="text" name="clinical_expense_injury_date" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="row form-single margin-top-10">
+                            <div class="col-md-4">Diagnosis:</div>
+                            <div class="col-md-5">
+                                <textarea id="clinical_expense_diagnosis" name="clinical_expense_diagnosis"
+                                    rows="4"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row form-single margin-top-10">
+                            <div class="col-md-4">Total Claimed Expense(s):</div>
+                            <div class="col-md-5">
+                                <input type="text" name="clinical_expense_total_expense" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="row form-single margin-top-20">
+                            <div class="col-md-4">Upload (if any applicable) :</div>
+                            <div class="col-md-5">
+                                <input type="file" name="clinical_expense_uploaded_file" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="form-heading margin-top-20 blue">Surgical & Hospitalization Expense (Benefit 5)</h3>
+                    <div class="form-detailss margin-top-20">
+
+                        <div class="row form-single margin-top-10">
+                            <div class="col-md-4">Date of Sickness / Injury:</div>
+                            <div class="col-md-5">
+                                <input type="text" name="surgical_injury_date" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="row form-single margin-top-10">
+                            <div class="col-md-4">Description of incident:</div>
+                            <div class="col-md-5">
+                                <textarea id="surgical_incident_description" name="surgical_incident_description"
+                                    rows="4"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row form-single margin-top-10">
+                            <div class="col-md-4">Diagnosis:</div>
+                            <div class="col-md-5">
+                                <textarea id="surgical_incident_diagnosis" name="surgical_incident_diagnosis"
+                                    rows="4"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row form-single margin-top-10">
+                            <div class="col-md-4">Total Claimed Expense(s):</div>
+                            <div class="col-md-5">
+                                <input type="text" name="surgical_incident_total_expense" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="row form-single margin-top-20">
+                            <div class="col-md-4">Upload (if any applicable) :</div>
+                            <div class="col-md-5">
+                                <input type="file" name="surgical_incident_uploaded_file" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="form-heading margin-top-20 blue">Dental Expenses (Benefit 6)</h3>
+                    <div class="form-detailss margin-top-20">
+
+                        <div class="row form-single margin-top-10">
+                            <div class="col-md-4">Date of Sickness / Injury:</div>
+                            <div class="col-md-5">
+                                <input type="text" name="dental_expense_date" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="row form-single margin-top-10">
+                            <div class="col-md-4">Description of incident:</div>
+                            <div class="col-md-5">
+                                <textarea id="dental_expense_description" name="dental_expense_description"
+                                    rows="4"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row form-single margin-top-10">
+                            <div class="col-md-4">Diagnosis:</div>
+                            <div class="col-md-5">
+                                <textarea id="dental_expense_diagnosis" name="dental_expense_diagnosis"
+                                    rows="4"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row form-single margin-top-10">
+                            <div class="col-md-4">Total Claimed Expense(s):</div>
+                            <div class="col-md-5">
+                                <input type="text" name="dental_expense_total_expense" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="row form-single margin-top-20">
+                            <div class="col-md-4">Upload (if any applicable) :</div>
+                            <div class="col-md-5">
+                                <input type="file" name="dental_expense_uploaded_file" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- clinicalSurgicalDental -->
+
+                <!-- cashAllowanceReplacement -->
+                <div id="cashAllowanceReplacement" class="tab-content-single dispaly-none">
+                    
+                    <h3 class="form-heading margin-top-20 blue">Loss of Services Cash Allowance (Benefit 7)</h3>
+                    <div class="form-detailss margin-top-20">
+
+                        <div class="row form-single margin-top-10">
+                            <div class="col-md-4">Date of Medical Consulation:</div>
+                            <div class="col-md-5">
+                                <input type="text" name="cash_allowance_injury_date" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="row form-single margin-top-10">
+                            <div class="col-md-4">Diagnosis:</div>
+                            <div class="col-md-5">
+                                <textarea id="cash_allowance_diagnosis" name="cash_allowance_diagnosis"
+                                    rows="4"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row form-single margin-top-10">
+                            <div class="col-md-4">Period of Hospital Confinement: </div>
+                            <div class="col-md-5">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="">From</span>
+                                    </div>
+                                    <input type="date" name="cash_allowance_period" class="form-control">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="">To</span>
+                                    </div>
+                                    <input type="date" name="cash_allowance_period" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row form-single margin-top-20">
+                            <div class="col-md-4">Upload (if any applicable) :</div>
+                            <div class="col-md-5">
+                                <input type="file" name="cash_allowance_uploaded_file" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="form-heading margin-top-20 blue">Replacement of Helper Expenses (Benefit 8)</h3>
+                    <div class="form-detailss margin-top-20">
+
+                        <div class="row form-single margin-top-10">
+                            <div class="col-md-4">Reason of Replacement:</div>
+                            <div class="col-md-5">
+                                <textarea id="replacement_description" name="replacement_description"
+                                    rows="4"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row form-single margin-top-10">
+                            <div class="col-md-4">Total Claimed Expense(s):</div>
+                            <div class="col-md-5">
+                                <input type="text" name="replacement_total_expense" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="row form-single margin-top-20">
+                            <div class="col-md-4">Upload (if any applicable) :</div>
+                            <div class="col-md-5">
+                                <input type="file" name="replacement_uploaded_file" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- cashAllowanceReplacement -->
 
                 <div id="declaration" class="tab-content-single dispaly-none">
                     <div class="form-detailss margin-top-20">
@@ -860,7 +742,7 @@
             var rowId = 1;
             $('.add-btn').on('click', function() {
                 $('#lossDamageTbody').append(`<tr id="">
-                                    <td class="row-index text-center new-serial"></td> 
+                                    <td class="row-index text-center new-serial"></td>
                                     <td>
                                         <input type="text" name="loss_damage_property_description[]" placeholder="">
                                     </td>
