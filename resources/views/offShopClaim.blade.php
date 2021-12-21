@@ -4,6 +4,7 @@
             <div class="procedure-claim-content">
                 <h1 class="red">Helper Insurance</h1>
                 <h1 class="blue">Claim Procedure</h1>
+                <!-- claim procedure  -->
                 <h4 class="blue">Submit your claim through EASY Claims – 3 steps to file your claims online anytime, anywhere</h4>
                 <div class="file-upload-procedure">
                     <h6 class="white">Simply scan or take a photo of your documents and submit them online wherever you are.</h6>
@@ -37,10 +38,14 @@
                         </div>
                     </div>
                 </div>
+                <!-- claim procedure  -->
+                
+                <!-- redirect claim form page  -->
                 <div class="procedure-actions margin-top-40">
-                    <a href="/home-claim-form" target="_blank">File your claim online</a>
+                    <a href="/off-shop-claim-form" target="_blank">File your claim online</a>
                     <a href="">Learn more about EASY Claims</a>
                 </div>
+                <!-- redirect claim form page  -->
             </div>
             <div class="post-claim contents">
                 <h5 class="blue bold">Or submit your claim through post:</h5>

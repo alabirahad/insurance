@@ -13,17 +13,28 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
+//employee claim
 Route::get('/', function () {
-    return view('index');
+    return view('employeeClaim');
 });
-Route::get('/claim', function () {
-    return view('claim');
-});
-Route::get('/employee-claim-form', function () {
-    return view('homeClaimForm');
+Route::get('/employee-claim', function () {
+    return view('employeeClaim');
 });
 Route::get('/employee-claim-form', function () {
     return view('employeeClaimForm');
+});
+
+//home claim
+Route::get('/home-claim', function () {
+    return view('homeClaim');
+});
+Route::get('/home-claim-form', function () {
+    return view('homeClaimForm');
+});
+
+//office shop claim
+Route::get('/off-shop-claim', function () {
+    return view('offShopClaim');
 });
 Route::get('/off-shop-claim-form', function () {
     return view('offShopClaimForm');

@@ -36,7 +36,7 @@
                 <div class="copyright">
                                 <div class="container">
                                     <div class="row">
-                                    All Rights Reserved. Copyright &copy; {{date('Y')}} XFlix | MSIG Insurance (Hong Kong) Limited
+                                    All Rights Reserved. Copyright &copy; {{date('Y')}} | MSIG Insurance (Hong Kong) Limited
                                     </div>
                                 </div>
                             </div>

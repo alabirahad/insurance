@@ -24,29 +24,29 @@
             <div class="row">
                 <div class="left-nav col-md-5">
                     <ul class="nav">
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#">Insureance</a>
+                        </li> --}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/employee-claim">Employee's Claims</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/claim">Claims</a>
+                            <a class="nav-link" href="/home-claim">Home Claims</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Promotions</a>
+                            <a class="nav-link" href="/off-shop-claim">Office / Shop Claims</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">News & Events</a>
-                        </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="#">About us</a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
                 <div class="col-md-2 logo">
-                    <a href="/">
+                    <a href="/employee-claim">
                         <img src="{{ asset('assets/img/logo2.png') }}" alt="" />
                     </a>
                 </div>
-                <div class="col-md-5 right-nav">
+                {{-- <div class="col-md-5 right-nav">
                     <ul class="nav">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#">Active</a>
@@ -58,7 +58,7 @@
                             <a class="nav-link" href="#">Link</a>
                         </li>
                     </ul>
-                </div>
+                </div> --}}
             </div>
             
         </header>
