@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\EmployeeClaimController;
+use App\Http\Controllers\HomeClaimController;
+use App\Http\Controllers\OfficeShopClaimController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +26,7 @@ Route::get('/employee-claim', function () {
 Route::get('/employee-claim-form', function () {
     return view('employeeClaimForm');
 });
+Route::post('/employee-claim-form/store', [EmployeeClaimController::class, "store"]);
 
 //home claim
 Route::get('/home-claim', function () {
@@ -31,6 +35,7 @@ Route::get('/home-claim', function () {
 Route::get('/home-claim-form', function () {
     return view('homeClaimForm');
 });
+Route::post('/home-claim-form/store', [HomeClaimController::class, "store"]);
 
 //office shop claim
 Route::get('/off-shop-claim', function () {
@@ -39,3 +44,4 @@ Route::get('/off-shop-claim', function () {
 Route::get('/off-shop-claim-form', function () {
     return view('offShopClaimForm');
 });
+Route::post('/off-shop-claim-form/store', [OfficeShopClaimController::class, "store"]);

@@ -274,3 +274,9 @@ input[type="checkbox"] {
     border-top: 5px solid #E11F27;
     padding: 50px 10px;
 }
+input[type="radio"] {
+    width: 20px;
+}
+.employee-submit{
+    width: 120px;
+}

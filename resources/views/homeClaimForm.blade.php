@@ -86,423 +86,461 @@
                 </div>
             </div>
 
-            <div class="tab-content margin-top-20">
-                <!-- contact & privecy form -->
-                <div id="contactPolicy" class="tab-content-single">
-                    <h3 class="form-heading margin-top-20 blue">Policy Details</h3>
-                    <div class="form-detailss margin-top-20">
+            <?php
+            $ses_msg = Session::has('success');
+            if (!empty($ses_msg)) {
+                ?>
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                    <p><i class="fa fa-bell-o fa-fw"></i> <?php echo Session::get('success'); ?></p>
+                </div>
+                <?php
+            }// 
+            $ses_msg = Session::has('error');
+            if (!empty($ses_msg)) {
+                ?>
+                <div class="alert alert-danger alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                    <p><i class="fa fa-bell-o fa-fw"></i> <?php echo Session::get('error'); ?></p>
+                </div>
+                <?php
+            }// ?>
+        
 
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Policy No.</div>
-                            <div class="col-md-5">
-                                <input type="text" name="policy_no" placeholder="XXX/99999/99">
+            <form id="userCreateForm" method="POST" enctype="multipart/form-data" action="/home-claim-form/store">
+                @csrf
+                <div class="tab-content margin-top-20">
+                    <!-- contact & privecy form -->
+                    <div id="contactPolicy" class="tab-content-single">
+                        <h3 class="form-heading margin-top-20 blue">Policy Details</h3>
+                        <div class="form-detailss margin-top-20">
+
+                            <div class="row form-single margin-top-10">
+                                <div class="col-md-4">Policy No.</div>
+                                <div class="col-md-5">
+                                    <input type="text" name="policy_no" placeholder="XXX/99999/99">
+                                </div>
                             </div>
+
+                            <div class="row form-single margin-top-10">
+                                <div class="col-md-4">Name of policy holder:</div>
+                                <div class="col-md-5">
+                                    <input type="text" name="policy_holder_name" placeholder="Mr. X">
+                                </div>
+                            </div>
+
+                            <div class="row form-single margin-top-10">
+                                <div class="col-md-4">Name of the insured:</div>
+                                <div class="col-md-5">
+                                    <input type="text" name="insured_name" placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="row form-single margin-top-10">
+                                <div class="col-md-4">Name of the claimant:</div>
+                                <div class="col-md-5">
+                                    <input type="text" name="claimant_name" placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="row form-single margin-top-10">
+                                <div class="col-md-12 red">Important: This eClaim form should be submitted by the
+                                    Policyholder/Insured Person. </div>
+                            </div>
+
                         </div>
 
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Name of policy holder:</div>
-                            <div class="col-md-5">
-                                <input type="text" name="policy_holder_name" placeholder="Mr. X">
+                        <h3 class="form-heading margin-top-20 blue">Contact Information</h3>
+                        <div class="form-detailss margin-top-20">
+
+                            <div class="row form-single margin-top-10">
+                                <div class="col-md-4">Name of contact person:</div>
+                                <div class="col-md-5">
+                                    <input type="text" name="contact_person_name" placeholder="Mr. X">
+                                </div>
+                            </div>
+
+                            <div class="row form-single margin-top-10">
+                                <div class="col-md-4">Email address:</div>
+                                <div class="col-md-5">
+                                    <input type="text" name="contact_person_email" placeholder="x@gmail.com">
+                                </div>
+                            </div>
+
+                            <div class="row form-single margin-top-10">
+                                <div class="col-md-4">Mobile no.:</div>
+                                <div class="col-md-5">
+                                    <input type="text" name="contact_person_mobile" placeholder="">
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    <!-- contact & privecy form -->
 
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Name of the insured:</div>
-                            <div class="col-md-5">
-                                <input type="text" name="insured_name" placeholder="">
+                    <!-- claim Information -->
+                    <div id="genaralClaim" class="tab-content-single dispaly-none ">
+                        <h3 class="form-heading margin-top-20 blue">Claim Information</h3>
+                        <div class="form-detailss margin-top-20">
+
+                            <div class="row form-single margin-top-10">
+                                <div class="col-md-4">Select claim types</div>
+                                <div class="col-md-5">
+                                    <input type="checkbox" name="claim_types[]" value="loss">Loss / damage to Home /
+                                    Household Content / Home Buildings <br>
+                                    <input type="checkbox" name="claim_types[]" value="personal">Personal / Public Liability
+                                    <br>
+                                    <input type="checkbox" name="claim_types[]" value="others">Others. <br>
+                                </div>
+                            </div>
+
+                            <div class="row form-single margin-top-10">
+                                <div class="col-md-4">Date & time of accident :</div>
+                                <div class="col-md-5">
+                                    <input type="text" name="accident_date" placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="row form-single margin-top-10">
+                                <div class="col-md-4">Location of incident :</div>
+                                <div class="col-md-5">
+                                    <input type="text" name="incident_location" placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="row form-single margin-top-10">
+                                <div class="col-md-4">Description of incident:</div>
+                                <div class="col-md-5">
+                                    <textarea id="incident_description" name="incident_description" rows="4"></textarea>
+                                    <!-- <input type="text" name="incident_description" placeholder=""> -->
+                                </div>
+                            </div>
+
+                            <div class="row form-single margin-top-20">
+                                <div class="col-md-4">Q1 : Is there any sign of forcible entry or exit at the premises
+                                    in case of theft or burglary loss? </div>
+                                <div class="col-md-5">
+                                    <input type="radio" name="claim_q1" value="yes"> Yes, please state how did the culprit(s)
+                                    enter the premises. <br>
+                                    <input type="radio" name="claim_q1" value="no">No <br>
+                                    <input type="radio" name="claim_q1" value="not_applicable">Not applicable <br>
+                                </div>
+                            </div>
+
+                            <div class="row form-single margin-top-20">
+                                <div class="col-md-4">Q2 : Has/ Will the incident been reported/ be reported to the
+                                    local police/ management office/ any other responsible party? </div>
+                                <div class="col-md-5">
+                                    <input type="radio" name="claim_q2" value="yes"> Yes, please state details (e.g. police
+                                    report number, etc) <br>
+                                    <input type="radio" name="claim_q2" value="no">No <br>
+                                </div>
+                            </div>
+
+                            <div class="row form-single margin-top-20">
+                                <div class="col-md-4">Q3 : Have you lodged/ Are you going to lodge complaint/ claim
+                                    against any other part(ies) concerning the loss/damage? </div>
+                                <div class="col-md-5">
+                                    <input type="radio" name="claim_q3" value="yes"> Yes, please state details<br>
+                                    <input type="radio" name="claim_q3" value="no">No <br>
+                                </div>
+                            </div>
+
+                            <div class="row form-single margin-top-20">
+                                <div class="col-md-4">Q4 : Are you the owner of damaged or lost item(s)/propert(ies)?
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="radio" name="claim_q4" value="yes"> Yes<br>
+                                    <input type="radio" name="claim_q4" value="no">No <br>
+                                </div>
+                            </div>
+
+                            <div class="row form-single margin-top-20">
+                                <div class="col-md-4">Q5 : Are you the occupier of the Insured Premises?</div>
+                                <div class="col-md-5">
+                                    <input type="radio" name="claim_q5" value="yes"> Yes<br>
+                                    <input type="radio" name="claim_q5" value="no">No <br>
+                                </div>
+                            </div>
+
+                            <div class="row form-single margin-top-20">
+                                <div class="col-md-4">Q6 : Were the insured premises being occupied at the time of
+                                    incident?</div>
+                                <div class="col-md-5">
+                                    <input type="radio" name="claim_q6" value="yes"> Yes<br>
+                                    <input type="radio" name="claim_q6" value="no">No <br>
+                                </div>
+                            </div>
+
+                            <div class="row form-single margin-top-20">
+                                <div class="col-md-4">Q7 : Is/Are the Insured propert(ies) subject to any Hire
+                                    Purchase or Loan Agreement?</div>
+                                <div class="col-md-5">
+                                    <input type="radio" name="claim_q7" value="yes"> Yes, please state details<br>
+                                    <input type="radio" name="claim_q7" value="no">No <br>
+                                </div>
+                            </div>
+
+                            <div class="row form-single margin-top-20">
+                                <div class="col-md-4">Q8 : Are the Insured also insured with any other insurance for
+                                    the Insured propert(ies) as a result of the same incident? </div>
+                                <div class="col-md-5">
+                                    <input type="radio" name="claim_q8" value="yes"> Yes, please state details<br>
+                                    <input type="radio" name="claim_q8" value="no">No <br>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- claim Information -->
+
+                    {{-- Loss / damage to Home --}}
+                    <div id="lossDamage" class="tab-content-single dispaly-none">
+                        <h3 class="form-heading margin-top-20 blue">Details of damaged or lost properties</h3>
+                        <div class="form-detailss margin-top-20">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <th>Description of property</th>
+                                    <th>
+                                        Date of purchase or installation
+                                        (DDMMYYYY)
+                                    </th>
+                                    <th>
+                                        Original
+                                        purchase price
+                                        (HK$)
+                                    </th>
+                                    <th>
+                                        Repair / Replacement cost (if applicable)
+                                        (HK$)
+                                    </th>
+                                    <th>
+                                        Claim amount
+                                        (HK$)
+                                    </th>
+                                    <th>
+                                        Total
+                                        (HK$)
+                                    </th>
+                                    <th>
+                                        Acction
+                                    </th>
+                                </thead>
+                                <tbody id="lossDamageTbody">
+                                    <tr id="1">
+                                        <td class="text-center initial-serial">1</td>
+                                        <td>
+                                            <input type="text" name="loss_damage_property_description[]" placeholder="">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="loss_damage_purchage_date[]" placeholder="">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="loss_damage_purchage_price[]" placeholder="">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="loss_damage_repair_cost[]" placeholder="">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="loss_damage_claim_amount[]" placeholder="">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="loss_damage_total[]" placeholder="">
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-success add-btn">Add</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="row form-single margin-top-20">
+                                <div class="col-md-4">Upload (if any applicable) :</div>
+                                <div class="col-md-5">
+                                    <input type="file" name="loss_damage_uploaded_file[]" placeholder="">
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    {{-- Loss / damage to Home --}}
 
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Name of the claimant:</div>
-                            <div class="col-md-5">
-                                <input type="text" name="claimant_name" placeholder="">
+                    <!-- liability -->
+                    <div id="laiability" class="tab-content-single dispaly-none">
+                        <h3 class="form-heading margin-top-20 blue">Damage to Property of other(s)</h3>
+                        <div class="form-detailss margin-top-20">
+                            <div class="row form-single margin-top-10">
+                                <div class="col-md-4">Name of the property owner :</div>
+                                <div class="col-md-5">
+                                    <input type="text" name="property_owner_name" placeholder="">
+                                </div>
                             </div>
+
+                            <div class="row form-single margin-top-10">
+                                <div class="col-md-4">Details & extent of damage to Property of other(s): </div>
+                                <div class="col-md-5">
+                                    <textarea id="damage_property_description" name="damage_property_description"
+                                        rows="4"></textarea>
+                                </div>
+                            </div>
+
                         </div>
 
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-12 red">Important: This eClaim form should be submitted by the
-                                Policyholder/Insured Person. </div>
+                        <h3 class="form-heading margin-top-20 blue">Injury to other(s)</h3>
+                        <div class="form-detailss margin-top-20">
+                            <div class="row form-single margin-top-10">
+                                <div class="col-md-4">Name of the injured:</div>
+                                <div class="col-md-5">
+                                    <input type="text" name="injured_name" placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="row form-single margin-top-10">
+                                <div class="col-md-4">Details & extent of injury of other(s): </div>
+                                <div class="col-md-5">
+                                    <textarea id="injury_description" name="injury_description" rows="4"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row form-single margin-top-20">
+                                <div class="col-md-4">Q1 : Was/Were other wrongdoer(s) involved in the same incident?
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="radio" name="laiabilityq1" value="yes"> Yes, please state the name(s),
+                                    address(es) & telephone No.(s) of the wrongdoer(s)<br>
+                                    <input type="radio" name="laiabilityq1" value="no">No <br>
+                                </div>
+                            </div>
+
+                            <div class="row form-single margin-top-20">
+                                <div class="col-md-4">Q2 : Has any communication, verbal or written, been made to you
+                                    by or on behalf of any injured or owner(s) of the damaged property? </div>
+                                <div class="col-md-5">
+                                    <input type="radio" name="laiabilityq2" value="yes"> Yes, please give particulars
+                                    (any written communication being received must be forwarded to us immediately unanswered
+                                    for our handling)<br>
+                                    <input type="radio" name="laiabilityq2" value="no">No <br>
+                                </div>
+                            </div>
+
+                            <div class="row form-single margin-top-20">
+                                <div class="col-md-4">Q3 : Has any step been taken to compromise or settle the
+                                    matter?</div>
+                                <div class="col-md-5">
+                                    <input type="radio" name="laiabilityq3" value="yes"> Yes, please state the nature
+                                    and by whom it was carried out with any compensation amount and withhold any further
+                                    communication with any involved part(ies).<br>
+                                    <input type="radio" name="laiabilityq3" value="no">No <br>
+                                </div>
+                            </div>
+
+
+                            <div class="row form-single margin-top-20">
+                                <div class="col-md-4">State all Name(s), address(es) and telephone No.(s) of witness(es) of the incident, if any.</div>
+                                <div class="col-md-5">
+                                    <textarea id="laiability_state_contact" name="laiability_state_contact"
+                                        rows="4"></textarea>
+                                </div>
+                            </div>
+
+
+                            <div class="row form-single margin-top-20">
+                                <div class="col-md-4">Upload (if any applicable)</div>
+                                <div class="col-md-5">
+                                    <input type="file" name="laiability_injured_file" id="">
+                                </div>
+                            </div>
+
+
                         </div>
 
                     </div>
+                    <!-- liability -->
 
-                    <h3 class="form-heading margin-top-20 blue">Contact Information</h3>
-                    <div class="form-detailss margin-top-20">
+                    <!-- others -->
+                    <div id="othersClaim" class="tab-content-single dispaly-none">
+                        <div class="form-detailss margin-top-20">
 
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Name of contact person:</div>
-                            <div class="col-md-5">
-                                <input type="text" name="contact_person_name" placeholder="Mr. X">
+                            <div class="row form-single margin-top-10">
+                                <div class="col-md-4">Reason of claim:</div>
+                                <div class="col-md-5">
+                                    <textarea id="others_resons_claim" name="others_resons_claim" rows="4"></textarea>
+                                </div>
                             </div>
+
+                            <div class="row form-single margin-top-10">
+                                <div class="col-md-4">Total claimed amount:</div>
+                                <div class="col-md-5">
+                                    <input type="text" name="others_claim_amount" placeholder="">
+                                </div>
+                            </div>
+
+
+                            <div class="row form-single margin-top-20">
+                                <div class="col-md-4">Upload (if any applicable)</div>
+                                <div class="col-md-5">
+                                    <input type="file" name="others_file" id="">
+                                </div>
+                            </div>
+
                         </div>
 
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Email address:</div>
-                            <div class="col-md-5">
-                                <input type="text" name="contact_person_email" placeholder="x@gmail.com">
+
+                    </div>
+                    <!-- others -->
+
+                    <div id="declaration" class="tab-content-single dispaly-none">
+                        <div class="form-detailss margin-top-20">
+
+                            <div class="row form-single margin-top-10">
+                                <div class="col-md-1">1 .</div>
+                                <div class="col-md-10">
+                                    I/We declare that the above information is in all respect true and complete to the best
+                                    of my/ our knowledge and belief;
+                                </div>
                             </div>
+
+                            <div class="row form-single margin-top-10">
+                                <div class="col-md-1">2 .</div>
+                                <div class="col-md-10">
+                                    It is agreed that upon request by xxxxxxx, I/We shall make a statutory declaration to
+                                    re-affirm the genuineness of all information contained in this claim submission; and
+                                </div>
+                            </div>
+
+                            <div class="row form-single margin-top-10">
+                                <div class="col-md-1">3 .</div>
+                                <div class="col-md-10">
+                                    I/We believe that the facts stated in this claim form are true and correct. I
+                                    acknowledge that the Insurers will rely upon the information supplied by me/ the
+                                    policyholder/ the insured person, which I verily and honestly believe to be true and
+                                    correct, in prosecuting or defending any claims or proceedings in future, and the
+                                    signatory/ the policyholders/ insured person under this policy, if so required by the
+                                    Insurers, will be asked and are bound to sign any court documents on the basis of
+                                    information provided herein.
+                                </div>
+                            </div>
+
+                            <div class="row form-single margin-top-10">
+                                <div class="col-md-11">
+                                    <input type="checkbox" name="agree" value="yes"> Yes, please give particulars (any
+                                    written communication being received must be forwarded to us immediately unanswered for
+                                    our handling)<br>
+                                </div>
+                            </div>
+
                         </div>
 
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Mobile no.:</div>
-                            <div class="col-md-5">
-                                <input type="text" name="contact_person_mobile" placeholder="">
-                            </div>
+                        <div class="margin-top-20 text-center">
+                            <button type="submit" class="btn btn-outline-danger employee-submit">Save</button>
                         </div>
                     </div>
                 </div>
-                <!-- contact & privecy form -->
 
-                <!-- claim Information -->
-                <div id="genaralClaim" class="tab-content-single dispaly-none ">
-                    <h3 class="form-heading margin-top-20 blue">Claim Information</h3>
-                    <div class="form-detailss margin-top-20">
-
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Select claim types</div>
-                            <div class="col-md-5">
-                                <input type="checkbox" name="claim_types[]" value="loss">Loss / damage to Home /
-                                Household Content / Home Buildings <br>
-                                <input type="checkbox" name="claim_types[]" value="personal">Personal / Public Liability
-                                <br>
-                                <input type="checkbox" name="claim_types[]" value="others">Others. <br>
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Date & time of accident :</div>
-                            <div class="col-md-5">
-                                <input type="text" name="accident_time" placeholder="">
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Location of incident :</div>
-                            <div class="col-md-5">
-                                <input type="text" name="incident_location" placeholder="">
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Description of incident:</div>
-                            <div class="col-md-5">
-                                <textarea id="incident_description" name="incident_description" rows="4"></textarea>
-                                <!-- <input type="text" name="incident_description" placeholder=""> -->
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-20">
-                            <div class="col-md-4">Q1 : Is there any sign of forcible entry or exit at the premises
-                                in case of theft or burglary loss? </div>
-                            <div class="col-md-5">
-                                <input type="checkbox" name="q1[]" value="yes"> Yes, please state how did the culprit(s)
-                                enter the premises. <br>
-                                <input type="checkbox" name="q1[]" value="no">No <br>
-                                <input type="checkbox" name="q1[]" value="not_applicable">Not applicable <br>
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-20">
-                            <div class="col-md-4">Q2 : Has/ Will the incident been reported/ be reported to the
-                                local police/ management office/ any other responsible party? </div>
-                            <div class="col-md-5">
-                                <input type="checkbox" name="q2[]" value="yes"> Yes, please state details (e.g. police
-                                report number, etc) <br>
-                                <input type="checkbox" name="q2[]" value="no">No <br>
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-20">
-                            <div class="col-md-4">Q3 : Have you lodged/ Are you going to lodge complaint/ claim
-                                against any other part(ies) concerning the loss/damage? </div>
-                            <div class="col-md-5">
-                                <input type="checkbox" name="q3[]" value="yes"> Yes, please state details<br>
-                                <input type="checkbox" name="q3[]" value="no">No <br>
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-20">
-                            <div class="col-md-4">Q4 : Are you the owner of damaged or lost item(s)/propert(ies)?
-                            </div>
-                            <div class="col-md-5">
-                                <input type="checkbox" name="q4[]" value="yes"> Yes<br>
-                                <input type="checkbox" name="q4[]" value="no">No <br>
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-20">
-                            <div class="col-md-4">Q5 : Are you the occupier of the Insured Premises?</div>
-                            <div class="col-md-5">
-                                <input type="checkbox" name="q5[]" value="yes"> Yes<br>
-                                <input type="checkbox" name="q5[]" value="no">No <br>
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-20">
-                            <div class="col-md-4">Q6 : Were the insured premises being occupied at the time of
-                                incident?</div>
-                            <div class="col-md-5">
-                                <input type="checkbox" name="q6[]" value="yes"> Yes<br>
-                                <input type="checkbox" name="q6[]" value="no">No <br>
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-20">
-                            <div class="col-md-4">Q7 : Is/Are the Insured propert(ies) subject to any Hire
-                                Purchase or Loan Agreement?</div>
-                            <div class="col-md-5">
-                                <input type="checkbox" name="q7[]" value="yes"> Yes, please state details<br>
-                                <input type="checkbox" name="q7[]" value="no">No <br>
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-20">
-                            <div class="col-md-4">Q8 : Are the Insured also insured with any other insurance for
-                                the Insured propert(ies) as a result of the same incident? </div>
-                            <div class="col-md-5">
-                                <input type="checkbox" name="q8[]" value="yes"> Yes, please state details<br>
-                                <input type="checkbox" name="q8[]" value="no">No <br>
-                            </div>
-                        </div>
-
-                    </div>
+                <div class="tab-content-prev-next row">
+                    <div class="col-md-6 text-left"><button id="prevbtn" type="button">Prev</button></div>
+                    <div class="col-md-6 text-right"><button id="nextbtn" type="button">Next</button></div>
+                    <div class="col-md-6"></div>
                 </div>
-                <!-- claim Information -->
-
-                {{-- Loss / damage to Home --}}
-                <div id="lossDamage" class="tab-content-single dispaly-none">
-                    <h3 class="form-heading margin-top-20 blue">Details of damaged or lost properties</h3>
-                    <div class="form-detailss margin-top-20">
-
-                        <table class="table table-bordered">
-                            <thead>
-                                <th>Description of property</th>
-                                <th>
-                                    Date of purchase or installation
-                                    (DDMMYYYY)
-                                </th>
-                                <th>
-                                    Original
-                                    purchase price
-                                    (HK$)
-                                </th>
-                                <th>
-                                    Repair / Replacement cost (if applicable)
-                                    (HK$)
-                                </th>
-                                <th>
-                                    Claim amount
-                                    (HK$)
-                                </th>
-                                <th>
-                                    Total
-                                    (HK$)
-                                </th>
-                                <th>
-                                    Acction
-                                </th>
-                            </thead>
-                            <tbody id="lossDamageTbody">
-                                <tr id="1">
-                                    <td class="text-center initial-serial">1</td>
-                                    <td>
-                                        <input type="text" name="loss_damage_property_description[]" placeholder="">
-                                    </td>
-                                    <td>
-                                        <input type="text" name="loss_damage_purchage_date[]" placeholder="">
-                                    </td>
-                                    <td>
-                                        <input type="text" name="loss_damage_purchage_price[]" placeholder="">
-                                    </td>
-                                    <td>
-                                        <input type="text" name="loss_damage_repair_cost[]" placeholder="">
-                                    </td>
-                                    <td>
-                                        <input type="text" name="loss_damage_claim_amount[]" placeholder="">
-                                    </td>
-                                    <td>
-                                        <input type="text" name="loss_damage_total[]" placeholder="">
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-success add-btn">Add</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
-                {{-- Loss / damage to Home --}}
-
-                <!-- liability -->
-                <div id="laiability" class="tab-content-single dispaly-none">
-                    <h3 class="form-heading margin-top-20 blue">Damage to Property of other(s)</h3>
-                    <div class="form-detailss margin-top-20">
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Name of the property owner :</div>
-                            <div class="col-md-5">
-                                <input type="text" name="property_owner_name" placeholder="">
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Details & extent of damage to Property of other(s): </div>
-                            <div class="col-md-5">
-                                <textarea id="damage_property_description" name="damage_property_description"
-                                    rows="4"></textarea>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <h3 class="form-heading margin-top-20 blue">Injury to other(s)</h3>
-                    <div class="form-detailss margin-top-20">
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Name of the injured:</div>
-                            <div class="col-md-5">
-                                <input type="text" name="injured_name" placeholder="">
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Details & extent of injury of other(s): </div>
-                            <div class="col-md-5">
-                                <textarea id="dinjury_description" name="dinjury_description" rows="4"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-20">
-                            <div class="col-md-4">Q1 : Was/Were other wrongdoer(s) involved in the same incident?
-                            </div>
-                            <div class="col-md-5">
-                                <input type="checkbox" name="laiabilityq1[]" value="yes"> Yes, please state the name(s),
-                                address(es) & telephone No.(s) of the wrongdoer(s)<br>
-                                <input type="checkbox" name="laiabilityq1[]" value="no">No <br>
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-20">
-                            <div class="col-md-4">Q2 : Has any communication, verbal or written, been made to you
-                                by or on behalf of any injured or owner(s) of the damaged property? </div>
-                            <div class="col-md-5">
-                                <input type="checkbox" name="laiabilityq2[]" value="yes"> Yes, please give particulars
-                                (any written communication being received must be forwarded to us immediately unanswered
-                                for our handling)<br>
-                                <input type="checkbox" name="laiabilityq2[]" value="no">No <br>
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-20">
-                            <div class="col-md-4">Q3 : Has any step been taken to compromise or settle the
-                                matter?</div>
-                            <div class="col-md-5">
-                                <input type="checkbox" name="laiabilityq3[]" value="yes"> Yes, please state the nature
-                                and by whom it was carried out with any compensation amount and withhold any further
-                                communication with any involved part(ies).<br>
-                                <input type="checkbox" name="laiabilityq3[]" value="no">No <br>
-                            </div>
-                        </div>
-
-
-                        <div class="row form-single margin-top-20">
-                            <div class="col-md-4">Q3 : Has any step been taken to compromise or settle the
-                                matter?</div>
-                            <div class="col-md-5">
-                                <input type="checkbox" name="laiabilityq3[]" value="yes"> Yes, please state the nature
-                                and by whom it was carried out with any compensation amount and withhold any further
-                                communication with any involved part(ies).<br>
-                                <input type="checkbox" name="laiabilityq3[]" value="no">No <br>
-                            </div>
-                        </div>
-
-
-                        <div class="row form-single margin-top-20">
-                            <div class="col-md-4">Upload (if any applicable)</div>
-                            <div class="col-md-5">
-                                <input type="file" name="injured_file" id="">
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                </div>
-                <!-- liability -->
-
-                <!-- others -->
-                <div id="othersClaim" class="tab-content-single dispaly-none">
-                    <div class="form-detailss margin-top-20">
-
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Reason of claim:</div>
-                            <div class="col-md-5">
-                                <textarea id="resons_claim" name="resons_claim" rows="4"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-4">Total claimed amount:</div>
-                            <div class="col-md-5">
-                                <input type="text" name="claim_amount" placeholder="">
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                </div>
-                <!-- others -->
-
-                <div id="declaration" class="tab-content-single dispaly-none">
-                    <div class="form-detailss margin-top-20">
-
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-1">1 .</div>
-                            <div class="col-md-10">
-                                I/We declare that the above information is in all respect true and complete to the best
-                                of my/ our knowledge and belief;
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-1">2 .</div>
-                            <div class="col-md-10">
-                                It is agreed that upon request by xxxxxxx, I/We shall make a statutory declaration to
-                                re-affirm the genuineness of all information contained in this claim submission; and
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-1">3 .</div>
-                            <div class="col-md-10">
-                                I/We believe that the facts stated in this claim form are true and correct. I
-                                acknowledge that the Insurers will rely upon the information supplied by me/ the
-                                policyholder/ the insured person, which I verily and honestly believe to be true and
-                                correct, in prosecuting or defending any claims or proceedings in future, and the
-                                signatory/ the policyholders/ insured person under this policy, if so required by the
-                                Insurers, will be asked and are bound to sign any court documents on the basis of
-                                information provided herein.
-                            </div>
-                        </div>
-
-                        <div class="row form-single margin-top-10">
-                            <div class="col-md-11">
-                                <input type="checkbox" name="agree" value="yes"> Yes, please give particulars (any
-                                written communication being received must be forwarded to us immediately unanswered for
-                                our handling)<br>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="tab-content-prev-next row">
-                <div class="col-md-6 text-left"><button id="prevbtn" type="button">Prev</button></div>
-                <div class="col-md-6 text-right"><button id="nextbtn" type="button">Next</button></div>
-                <div class="col-md-6"></div>
-            </div>
+            </form>
 
         </div>
 
