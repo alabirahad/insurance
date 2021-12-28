@@ -7,6 +7,7 @@ use File;
 use Illuminate\Http\Request;
 use Response;
 use Session;
+use Validator;
 
 class OfficeShopClaimController extends Controller
 {
@@ -14,33 +15,108 @@ class OfficeShopClaimController extends Controller
     {
         try {
             // dd($request->all());
-            // $rules = [
-            //     'category_id'        => 'required|not_in:0',
-            //     'title'              => 'required',
-            //     'year'               => 'required|numeric',
-            //     'duration'           => 'required|numeric',
-            //     'video_type'         => 'required|not_in:0',
-            //     'thumbnail'          => 'required',
-            //     'thumbnail_vertical' => 'required',
-            //     'description'        => 'required',
-            //     'status'             => Rule::in(['active', 'inactive']),
-            // ];
-            // if (($request->video_type) == "4") {
-            //     $rules['video'] = 'required';
-            // } else {
-            //     $rules['url'] = 'required';
-            // }
+            $rules = [
+                'policy_no' => 'required|regex:/^[0-9][A-Z]{2}[0-9]{7}$/',
+                'policy_holder_name' => 'required',
+                'insured_name' => 'required',
+                'claimant_name' => 'required',
+                'contact_person_name' => 'required',
+                'contact_person_email' => 'required|email:rfc,dns',
+                'contact_person_mobile' => 'required',
+                'claim_types' => 'required',
+                'accident_date' => 'required|date',
+                'incident_location' => 'required',
+                'incident_description' => 'required',
+                'claim_q1' => 'required',
+                'claim_q2' => 'required',
+                'claim_q3' => 'required',
+                'claim_q4' => 'required',
+                'claim_q5' => 'required',
+                'agree' => 'required',
+            ];
+            if (($request->claim_q1) == "yes") {
+                $rules['claim_q1_description'] = 'required';
+            }
+            if (($request->claim_q2) == "yes") {
+                $rules['claim_q2_description'] = 'required';
+            }
+            if (($request->claim_q3) == "yes") {
+                $rules['claim_q3_description'] = 'required';
+            }
+            if (($request->claim_q5) == "yes") {
+                $rules['claim_q5_description'] = 'required';
+            }
 
-            // if (($request->is_series) == "on") {
-            //     $rules['series_id'] = 'required|not_in:0';
-            //     $rules['season_id'] = 'required|not_in:0';
-            //     $rules['episod_id'] = 'required|not_in:0';
-            // }
+            if(!empty($request->claim_types)){
+                if(in_array('loss_of_money', $request->claim_types)){
+                    $rules['loss_money_resons_claim'] = 'required';
+                    $rules['loss_money_claim_amount'] = 'required';
+                }
+            }
 
-            // $validate = Validator::make(request()->all(), $rules);
-            // if ($validate->fails()) {
-            //     return Response::json(['success' => false, 'heading' => 'Validtion Error', 'message' => $validate->errors()], 422);
-            // }
+            if(!empty($request->claim_types)){
+                if(in_array('personal_assault', $request->claim_types)){
+                    $rules['personal_assault_name'] = 'required';
+                    $rules['personal_assault_name_claimant'] = 'required';
+                    $rules['personal_assault_reason'] = 'required';
+                }
+            }
+            
+
+            if(!empty($request->claim_types)){
+                if(in_array('plate_glass', $request->claim_types)){
+                    $rules['plate_glass_resons_claim'] = 'required';
+                }
+            }
+            
+
+            if(!empty($request->claim_types)){
+                if(in_array('employee_compensation', $request->claim_types)){
+                    $rules['employee_compensation_injury_date'] = 'required|date';
+                    $rules['employee_compensation_incident_description'] = 'required';
+                    $rules['employee_compensation_sick_leave_from'] = 'required';
+                    $rules['employee_compensation_sick_leave_to'] = 'required';
+                    $rules['employee_compensation_injury_nature'] = 'required';
+                }
+            }
+
+            if(!empty($request->claim_types)){
+                if(in_array('others', $request->claim_types)){
+                    $rules['resons_claim'] = 'required';
+                }
+            }
+
+            if(!empty($request->claim_types)){
+                if(in_array('public_liability', $request->claim_types)){
+                    $rules['public_liability_owner_name'] = 'required';
+                    $rules['public_liability_detaile_damage'] = 'required';
+                    $rules['injured_name'] = 'required';
+                    $rules['injury_description'] = 'required';
+                    $rules['laiabilityq1'] = 'required';
+                    $rules['laiabilityq2'] = 'required';
+                    $rules['laiabilityq3'] = 'required';
+                    
+                    if (($request->laiabilityq1) == "yes") {
+                        $rules['laiabilityq1_description'] = 'required';
+                    }
+                    if (($request->laiabilityq2) == "yes") {
+                        $rules['laiabilityq2_description'] = 'required';
+                    }
+                    if (($request->laiabilityq3) == "yes") {
+                        $rules['laiabilityq3_description'] = 'required';
+                    }
+                }
+            }
+
+
+
+
+            $validate = Validator::make(request()->all(), $rules);
+            if ($validate->fails()) {
+                return redirect('off-shop-claim-form')
+                    ->withInput()
+                    ->withErrors($validate);
+            }
 
             $loss_damage_uploaded_file = $business_interruption_uploaded_file = $loss_money_uploaded_file = '';
             $injured_file              = $personal_assault_uploaded_file              = $plate_glass_uploaded_file              = $employee_compensation_uploaded_file              = '';
@@ -136,10 +212,14 @@ class OfficeShopClaimController extends Controller
             $target->incident_location    = $request->incident_location;
             $target->incident_description = $request->incident_description;
             $target->claim_q1             = $request->claim_q1;
+            $target->claim_q1_description             = $request->claim_q1_description;
             $target->claim_q2             = $request->claim_q2;
+            $target->claim_q2_description             = $request->claim_q2_description;
             $target->claim_q3             = $request->claim_q3;
+            $target->claim_q3_description             = $request->claim_q3_description;
             $target->claim_q4             = $request->claim_q4;
             $target->claim_q5             = $request->claim_q5;
+            $target->claim_q5_description             = $request->claim_q5_description;
 
             $target->loss_damage_item_description     = $request->loss_damage_item_description ? json_encode($request->loss_damage_item_description) : '';
             $target->loss_damage_item_reason_cost     = $request->loss_damage_item_reason_cost ? json_encode($request->loss_damage_item_reason_cost) : '';
@@ -167,8 +247,11 @@ class OfficeShopClaimController extends Controller
             $target->injured_name                    = $request->injured_name;
             $target->injury_description              = $request->injury_description;
             $target->laiabilityq1                    = $request->laiabilityq1;
+            $target->laiabilityq1_description                    = $request->laiabilityq1_description;
             $target->laiabilityq2                    = $request->laiabilityq2;
+            $target->laiabilityq2_description                    = $request->laiabilityq2_description;
             $target->laiabilityq3                    = $request->laiabilityq3;
+            $target->laiabilityq3_description                    = $request->laiabilityq3_description;
             $target->injured_file                    = $injured_file;
 
             $target->personal_assault_name          = $request->personal_assault_name;

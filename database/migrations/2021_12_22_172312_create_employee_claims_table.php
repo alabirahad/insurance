@@ -23,6 +23,7 @@ class CreateEmployeeClaimsTable extends Migration
             $table->string('contact_person_email')->nullable();
             $table->string('contact_person_mobile')->nullable();
             $table->string('claimant_person_injured')->nullable();
+            $table->string('claimant_person_injured_description')->nullable();
             $table->string('claim_types')->nullable();
 
             $table->string('employee_compensation_injury_date')->nullable();

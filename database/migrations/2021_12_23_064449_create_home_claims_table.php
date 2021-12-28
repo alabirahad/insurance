@@ -28,13 +28,18 @@ class CreateHomeClaimsTable extends Migration
             $table->string('incident_location')->nullable();
             $table->string('incident_description')->nullable();
             $table->string('claim_q1')->nullable();
+            $table->string('claim_q1_description')->nullable();
             $table->string('claim_q2')->nullable();
+            $table->string('claim_q2_description')->nullable();
             $table->string('claim_q3')->nullable();
+            $table->string('claim_q3_description')->nullable();
             $table->string('claim_q4')->nullable();
             $table->string('claim_q5')->nullable();
             $table->string('claim_q6')->nullable();
             $table->string('claim_q7')->nullable();
+            $table->string('claim_q7_description')->nullable();
             $table->string('claim_q8')->nullable();
+            $table->string('claim_q8_description')->nullable();
 
             $table->string('loss_damage_property_description')->nullable();
             $table->string('loss_damage_purchage_date')->nullable();
@@ -49,8 +54,11 @@ class CreateHomeClaimsTable extends Migration
             $table->string('injured_name')->nullable();
             $table->string('injury_description')->nullable();
             $table->string('laiabilityq1')->nullable();
+            $table->string('laiabilityq1_description')->nullable();
             $table->string('laiabilityq2')->nullable();
+            $table->string('laiabilityq2_description')->nullable();
             $table->string('laiabilityq3')->nullable();
+            $table->string('laiabilityq3_description')->nullable();
             $table->string('laiability_state_contact')->nullable();
             $table->string('laiability_injured_file')->nullable();
 

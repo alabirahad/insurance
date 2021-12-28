@@ -240,6 +240,9 @@ button.tab-heading-btn {
 .dispaly-none{
     display: none;
 }
+.tab-heading-item {
+    width: 20%;
+}
 
 .tab-content-prev-next button {
     margin: 10px;
@@ -279,4 +282,7 @@ input[type="radio"] {
 }
 .employee-submit{
     width: 120px;
+}
+.display-none{
+    display: none;
 }

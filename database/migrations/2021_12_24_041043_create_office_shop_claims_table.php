@@ -28,10 +28,14 @@ class CreateOfficeShopClaimsTable extends Migration
             $table->string('incident_location')->nullable();
             $table->string('incident_description')->nullable();
             $table->string('claim_q1')->nullable();
+            $table->string('laiabilityq1_description')->nullable();
             $table->string('claim_q2')->nullable();
+            $table->string('laiabilityq2_description')->nullable();
             $table->string('claim_q3')->nullable();
+            $table->string('laiabilityq3_description')->nullable();
             $table->string('claim_q4')->nullable();
             $table->string('claim_q5')->nullable();
+            $table->string('laiabilityq5_description')->nullable();
 
             $table->string('loss_damage_item_description')->nullable();
             $table->string('loss_damage_item_reason_cost')->nullable();
@@ -59,8 +63,11 @@ class CreateOfficeShopClaimsTable extends Migration
             $table->string('injured_name')->nullable();
             $table->string('injury_description')->nullable();
             $table->string('laiabilityq1')->nullable();
+            $table->string('laiabilityq1_description')->nullable();
             $table->string('laiabilityq2')->nullable();
+            $table->string('laiabilityq2_description')->nullable();
             $table->string('laiabilityq3')->nullable();
+            $table->string('laiabilityq3_description')->nullable();
             $table->string('injured_file')->nullable();
 
             $table->string('personal_assault_name')->nullable();

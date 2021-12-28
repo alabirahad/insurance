@@ -54,34 +54,29 @@
 
         <div class="content-body">
             <div class="row tab-heading margin-top-40">
-                <div class="col-md-2 tab-heading-item">
-                    <button data-id="contactPolicy" class="tab-heading-btn tab-heading-btn-active">
-                        Contact & Policy Information
+                <div class="tab-heading-item">
+                    <button data-id="policyInfo" class="tab-heading-btn tab-heading-btn-active">
+                        Policy Information
                     </button>
                 </div>
-                <div class="col-md-2 tab-heading-item">
-                    <button data-id="genaralClaim" class="tab-heading-btn">
-                        General Claim Information
+                <div class="tab-heading-item">
+                    <button data-id="contactInfo" class="tab-heading-btn">
+                        Contact Information
                     </button>
                 </div>
-                <div class="col-md-2 tab-heading-item">
-                    <button data-id="compensationAccidentRepatriation" class="tab-heading-btn">
-                    Employee's Compensation, Personal Accident, Repatriation
+                <div class="tab-heading-item">
+                    <button data-id="claimsInfo" class="tab-heading-btn">
+                        Claims Information 
                     </button>
                 </div>
-                <div class="col-md-2 tab-heading-item">
-                    <button data-id="clinicalSurgicalDental" class="tab-heading-btn">
-                        Clinical Expenses, Surgical & Hospitalization Expense, Dental Expenses
-                    </button>
-                </div>
-                <div class="col-md-2 tab-heading-item">
-                    <button data-id="cashAllowanceReplacement" class="tab-heading-btn">
-                        Loss of Services Cash Allowance, Replacement of Helper Expenses
-                    </button>
-                </div>
-                <div class="col-md-2 tab-heading-item">
-                    <button data-id="declaration" class="tab-heading-btn">
+                <div class="tab-heading-item">
+                    <button data-id="declarationAuthorization" class="tab-heading-btn">
                         Declaration & Authorization
+                    </button>
+                </div>
+                <div class="tab-heading-item">
+                    <button data-id="endSection" class="tab-heading-btn">
+                        End Section
                     </button>
                 </div>
             </div>
@@ -109,8 +104,8 @@
             <form id="userCreateForm" method="POST" enctype="multipart/form-data" action="/employee-claim-form/store">
                 @csrf
                 <div class="tab-content margin-top-20">
-                    <!-- contact & privecy form -->
-                    <div id="contactPolicy" class="tab-content-single">
+                    <!-- privecy form -->
+                    <div id="policyInfo" class="tab-content-single">
                         <h3 class="form-heading margin-top-20 blue">Policy Details</h3>
                         <div class="form-detailss margin-top-20">
 
@@ -118,6 +113,7 @@
                                 <div class="col-md-4">Policy No.</div>
                                 <div class="col-md-5">
                                     <input type="text" name="policy_no" placeholder="XXX/99999/99">
+                                    <span class="text-danger">{{ $errors->first('policy_no') }}</span>
                                 </div>
                             </div>
 
@@ -125,6 +121,7 @@
                                 <div class="col-md-4">Name of policy holder:</div>
                                 <div class="col-md-5">
                                     <input type="text" name="policy_holder_name" placeholder="Mr. X">
+                                    <span class="text-danger">{{ $errors->first('policy_holder_name') }}</span>
                                 </div>
                             </div>
 
@@ -132,6 +129,7 @@
                                 <div class="col-md-4">Name of the insured:</div>
                                 <div class="col-md-5">
                                     <input type="text" name="insured_name" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('insured_name') }}</span>
                                 </div>
                             </div>
 
@@ -139,6 +137,7 @@
                                 <div class="col-md-4">Name of the claimant:</div>
                                 <div class="col-md-5">
                                     <input type="text" name="claimant_name" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('claimant_name') }}</span>
                                 </div>
                             </div>
 
@@ -148,6 +147,11 @@
                             </div>
 
                         </div>
+                    </div>
+                    <!-- privecy form -->
+
+                    <!-- contact Information -->
+                    <div id="contactInfo" class="tab-content-single dispaly-none ">
 
                         <h3 class="form-heading margin-top-20 blue">Contact Information</h3>
                         <div class="form-detailss margin-top-20">
@@ -156,6 +160,7 @@
                                 <div class="col-md-4">Name of contact person:</div>
                                 <div class="col-md-5">
                                     <input type="text" name="contact_person_name" placeholder="Mr. X">
+                                    <span class="text-danger">{{ $errors->first('contact_person_name') }}</span>
                                 </div>
                             </div>
 
@@ -163,6 +168,7 @@
                                 <div class="col-md-4">Email address:</div>
                                 <div class="col-md-5">
                                     <input type="text" name="contact_person_email" placeholder="x@gmail.com">
+                                    <span class="text-danger">{{ $errors->first('contact_person_email') }}</span>
                                 </div>
                             </div>
 
@@ -170,14 +176,16 @@
                                 <div class="col-md-4">Mobile no.:</div>
                                 <div class="col-md-5">
                                     <input type="text" name="contact_person_mobile" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('contact_person_mobile') }}</span>
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
-                    <!-- contact & privecy form -->
+                    <!-- contact Information -->
 
-                    <!-- claim Information -->
-                    <div id="genaralClaim" class="tab-content-single dispaly-none ">
+                    <!-- Claims Information -->
+                    <div id="claimsInfo" class="tab-content-single dispaly-none">
                         <h3 class="form-heading margin-top-20 blue">Claim Information</h3>
                         <div class="form-detailss margin-top-20">
 
@@ -185,106 +193,32 @@
                                 <div class="col-md-4">Are the claimant/Insured person also insured with any other insurance for the Insured person as a result of the same incident? </div>
                                 <div class="col-md-5">
                                     <input type="radio" name="claimant_person_injured" value="yes">Yes, please state details<br>
+                                    <textarea name="claimant_person_injured_description" rows="4" class=""></textarea><br>
+                                    <span class="text-danger">{{ $errors->first('claimant_person_injured_description') }}</span>
                                     <input type="radio" name="claimant_person_injured" value="no">No<br>
+                                    <span class="text-danger">{{ $errors->first('claimant_person_injured') }}</span>
                                 </div>
                             </div>
 
                             <div class="row form-single margin-top-10">
                                 <div class="col-md-4">Select claim types</div>
                                 <div class="col-md-5">
-                                    <input type="checkbox" name="claim_types[]" value="loss">Loss or damage to Contents /
-                                    Stock <br>
-                                    <input type="checkbox" name="claim_types[]" value="business_interruption">Business
-                                    Interruption <br>
-                                    <input type="checkbox" name="claim_types[]" value="loss_of_money">Loss of Money <br>
-                                    <input type="checkbox" name="claim_types[]" value="public_liability">Public Liability
-                                    <br>
-                                    <input type="checkbox" name="claim_types[]" value="personal_assault">Personal Assault
-                                    <br>
-                                    <input type="checkbox" name="claim_types[]" value="plate_glass">Plate Glass <br>
                                     <input type="checkbox" name="claim_types[]" value="employee_compensation">Employee's
-                                    Compensation <br>
-                                    <input type="checkbox" name="claim_types[]" value="others">Others <br>
+                                    Compensation (Benefit 1) <br>
+                                    <input type="checkbox" name="claim_types[]" value="personal_accident">Personal Accident (Benefit 2)
+                                    <br>
+                                    <input type="checkbox" name="claim_types[]" value="repatriation">Repatriation (Benefit 3)<br>
+                                    <input type="checkbox" name="claim_types[]" value="clinical_expense">Clinical Expenses (Benefit 4)<br>
+                                    <input type="checkbox" name="claim_types[]" value="surgical_injury">Surgical & Hospitalization Expense (Benefit 5) <br>
+                                    <input type="checkbox" name="claim_types[]" value="public_liability">Dental Expenses (Benefit 6)
+                                    <br>
+                                    <input type="checkbox" name="claim_types[]" value="cash_allowance">Loss of Services Cash Allowance (Benefit 7) <br>
+                                    <input type="checkbox" name="claim_types[]" value="replacement">Replacement of Helper Expenses (Benefit 8) <br>
+                                    <span class="text-danger">{{ $errors->first('claim_types') }}</span>
                                 </div>
                             </div>
-
-                            {{-- <div class="row form-single margin-top-10">
-                                <div class="col-md-4">Date & time of accident :</div>
-                                <div class="col-md-5">
-                                    <input type="text" name="accident_time" placeholder="">
-                                </div>
-                            </div>
-
-                            <div class="row form-single margin-top-10">
-                                <div class="col-md-4">Location of incident :</div>
-                                <div class="col-md-5">
-                                    <input type="text" name="incident_location" placeholder="">
-                                </div>
-                            </div>
-
-                            <div class="row form-single margin-top-10">
-                                <div class="col-md-4">Description of incident:</div>
-                                <div class="col-md-5">
-                                    <textarea id="incident_description" name="incident_description" rows="4"></textarea>
-                                    <!-- <input type="text" name="incident_description" placeholder=""> -->
-                                </div>
-                            </div>
-
-                            <div class="row form-single margin-top-20">
-                                <div class="col-md-4">Q1 : Is there any sign of forcible entry or exit at the premises
-                                    in case of theft or burglary loss? </div>
-                                <div class="col-md-5">
-                                    <input type="checkbox" name="q1[]" value="yes"> Yes, please state how did the culprit(s)
-                                    enter the premises.
-                                    enter the premises. <br>
-                                    <input type="checkbox" name="q1[]" value="no">No <br>
-                                    <input type="checkbox" name="q1[]" value="not_applicable">Not applicable <br>
-                                </div>
-                            </div>
-
-                            <div class="row form-single margin-top-20">
-                                <div class="col-md-4">Q2 : Has/ Will the incident been reported/ be reported to the
-                                    local police/ management office/ any other Authorit(ies)/ part(ies)?</div>
-                                <div class="col-md-5">
-                                    <input type="checkbox" name="q2[]" value="yes"> Yes, please state details (e.g. police
-                                    report number, etc) <br>
-                                    <input type="checkbox" name="q2[]" value="no">No <br>
-                                </div>
-                            </div>
-
-                            <div class="row form-single margin-top-20">
-                                <div class="col-md-4">Q3 : Have you lodged/ Are you going to lodge complaint/ claim
-                                    against any other part(ies) concerning the loss/damage? </div>
-                                <div class="col-md-5">
-                                    <input type="checkbox" name="q3[]" value="yes"> Yes, please state details<br>
-                                    <input type="checkbox" name="q3[]" value="no">No <br>
-                                </div>
-                            </div>
-
-                            <div class="row form-single margin-top-20">
-                                <div class="col-md-4">Q4 : Are you the owner of damaged or lost item(s)/propert(ies)?
-                                </div>
-                                <div class="col-md-5">
-                                    <input type="checkbox" name="q4[]" value="yes"> Yes<br>
-                                    <input type="checkbox" name="q4[]" value="no">No <br>
-                                </div>
-                            </div>
-
-                            <div class="row form-single margin-top-20">
-                                <div class="col-md-4">Q5 : Are the Insured also insured with any other insurance for
-                                    the Insured propert(ies) as a result of the same incident? </div>
-                                <div class="col-md-5">
-                                    <input type="checkbox" name="q5[]" value="yes"> Yes, please state details<br>
-                                    <input type="checkbox" name="q5[]" value="no">No <br>
-                                </div>
-                            </div> --}}
 
                         </div>
-                    </div>
-                    <!-- claim Information -->
-
-                    <!-- compensationAccidentRepatriation -->
-                    <div id="compensationAccidentRepatriation" class="tab-content-single dispaly-none">
 
                         <h3 class="form-heading margin-top-20 blue">Employee's Compensation (Benefit 1) </h3>
                         <div class="form-detailss margin-top-20">
@@ -318,7 +252,8 @@
                                 <div class="row form-single margin-top-10">
                                     <div class="col-md-4">Date of injury:</div>
                                     <div class="col-md-5">
-                                        <input type="text" name="employee_compensation_injury_date" placeholder="">
+                                        <input type="date" name="employee_compensation_injury_date" placeholder="">
+                                        <span class="text-danger">{{ $errors->first('employee_compensation_injury_date') }}</span>
                                     </div>
                                 </div>
 
@@ -327,6 +262,7 @@
                                     <div class="col-md-5">
                                         <textarea id="employee_compensation_incident_description" name="employee_compensation_incident_description"
                                             rows="4"></textarea>
+                                            <span class="text-danger">{{ $errors->first('employee_compensation_incident_description') }}</span>
                                     </div>
                                 </div>
                                 <div class="row form-single margin-top-10">
@@ -337,10 +273,12 @@
                                                 <span class="input-group-text" id="">From</span>
                                             </div>
                                             <input type="date" name="employee_compensation_sick_leave_from" class="form-control">
+                                            <span class="text-danger">{{ $errors->first('employee_compensation_sick_leave_from') }}</span>
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="">To</span>
                                             </div>
                                             <input type="date" name="employee_compensation_sick_leave_to" class="form-control">
+                                            <span class="text-danger">{{ $errors->first('employee_compensation_sick_leave_to') }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -350,6 +288,7 @@
                                     <div class="col-md-5">
                                         <textarea id="employee_compensation_injury_nature" name="employee_compensation_injury_nature"
                                             rows="4"></textarea>
+                                            <span class="text-danger">{{ $errors->first('employee_compensation_injury_nature') }}</span>
                                     </div>
                                 </div>
 
@@ -357,6 +296,7 @@
                                     <div class="col-md-4">Upload (if any applicable) :</div>
                                     <div class="col-md-5">
                                         <input type="file" name="employee_compensation_uploaded_file[]" placeholder="">
+                                        <span class="text-danger">{{ $errors->first('employee_compensation_uploaded_file') }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -368,7 +308,8 @@
                             <div class="row form-single margin-top-10">
                                 <div class="col-md-4">Date of injury:</div>
                                 <div class="col-md-5">
-                                    <input type="text" name="personal_accident_injury_date" placeholder="">
+                                    <input type="date" name="personal_accident_injury_date" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('personal_accident_injury_date') }}</span>
                                 </div>
                             </div>
 
@@ -377,6 +318,7 @@
                                 <div class="col-md-5">
                                     <textarea id="personal_accident_incident_description" name="personal_accident_incident_description"
                                         rows="4"></textarea>
+                                        <span class="text-danger">{{ $errors->first('personal_accident_incident_description') }}</span>
                                 </div>
                             </div>
                             <div class="row form-single margin-top-10">
@@ -387,10 +329,12 @@
                                             <span class="input-group-text" id="">From</span>
                                         </div>
                                         <input type="date" name="personal_accident_sick_leave_from" class="form-control">
+                                        <span class="text-danger">{{ $errors->first('personal_accident_sick_leave_from') }}</span>
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="">To</span>
                                         </div>
                                         <input type="date" name="personal_accident_sick_leave_to" class="form-control">
+                                        <span class="text-danger">{{ $errors->first('personal_accident_sick_leave_to') }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -400,6 +344,7 @@
                                 <div class="col-md-5">
                                     <textarea id="personal_accident_injury_nature" name="personal_accident_injury_nature"
                                         rows="4"></textarea>
+                                        <span class="text-danger">{{ $errors->first('personal_accident_injury_nature') }}</span>
                                 </div>
                             </div>
 
@@ -408,6 +353,10 @@
                                 <div class="col-md-5">
                                     <input type="radio" name="personal_accident_recoverd" value="yes">Yes<br>
                                     <input type="radio" name="personal_accident_recoverd" value="no">No, please state details, e.g. what medical treatment(s) will be received & how long the sick leave being granted:<br>
+                                    <textarea name="personal_accident_recoverd_description" rows="4" class=""></textarea><br>
+                                    <span class="text-danger">{{ $errors->first('personal_accident_recoverd_description') }}</span>
+                                    
+                                    <span class="text-danger">{{ $errors->first('personal_accident_recoverd') }}</span>
                                 </div>
                             </div>
 
@@ -415,18 +364,20 @@
                                 <div class="col-md-4">Upload (if any applicable) :</div>
                                 <div class="col-md-5">
                                     <input type="file" name="personal_accident_uploaded_file" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('personal_accident_uploaded_file') }}</span>
                                 </div>
                             </div>
                         </div>
 
-                        <h3 class="form-heading margin-top-20 blue">Repatriation (Benefit 2) </h3>
+                        <h3 class="form-heading margin-top-20 blue">Repatriation (Benefit 3) </h3>
                         <div class="form-detailss margin-top-20">
                             
 
                             <div class="row form-single margin-top-10">
                                 <div class="col-md-4">Date of Death / Serious Sickness / Injury:</div>
                                 <div class="col-md-5">
-                                    <input type="text" name="repatriation_injury_date" placeholder="">
+                                    <input type="date" name="repatriation_injury_date" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('repatriation_injury_date') }}</span>
                                 </div>
                             </div>
 
@@ -436,6 +387,7 @@
                                 <div class="col-md-5">
                                     <textarea id="repatriation_incident_description" name="repatriation_incident_description"
                                         rows="4"></textarea>
+                                        <span class="text-danger">{{ $errors->first('repatriation_incident_description') }}</span>
                                 </div>
                             </div>
                             <div class="row form-single margin-top-10">
@@ -443,6 +395,7 @@
                                 <div class="col-md-5">
                                     <textarea id="repatriation_reason" name="repatriation_reason"
                                         rows="4"></textarea>
+                                        <span class="text-danger">{{ $errors->first('repatriation_reason') }}</span>
                                 </div>
                             </div>
 
@@ -451,6 +404,10 @@
                                 <div class="col-md-5">
                                     <input type="radio" name="repatriation_recoverd" value="yes">Yes<br>
                                     <input type="radio" name="repatriation_recoverd" value="no">No, please state details, e.g. what medical treatment(s) will be received & how long the sick leave being granted:<br>
+                                    <textarea name="repatriation_recoverd_description" rows="4" class=""></textarea><br>
+                                    <span class="text-danger">{{ $errors->first('repatriation_recoverd_description') }}</span>
+                                    
+                                    <span class="text-danger">{{ $errors->first('repatriation_recoverd') }}</span>
                                 </div>
                             </div>
 
@@ -458,14 +415,10 @@
                                 <div class="col-md-4">Upload (if any applicable) :</div>
                                 <div class="col-md-5">
                                     <input type="file" name="repatriation_uploaded_file" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('repatriation_uploaded_file') }}</span>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- compensationAccidentRepatriation -->
-
-                    <!-- clinicalSurgicalDental -->
-                    <div id="clinicalSurgicalDental" class="tab-content-single dispaly-none">
 
                         <h3 class="form-heading margin-top-20 blue">Clinical Expenses (Benefit 4)</h3>
                         <div class="form-detailss margin-top-20">
@@ -473,7 +426,8 @@
                             <div class="row form-single margin-top-10">
                                 <div class="col-md-4">Date of Medical Consulation:</div>
                                 <div class="col-md-5">
-                                    <input type="text" name="clinical_expense_injury_date" placeholder="">
+                                    <input type="date" name="clinical_expense_injury_date" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('clinical_expense_injury_date') }}</span>
                                 </div>
                             </div>
 
@@ -482,6 +436,7 @@
                                 <div class="col-md-5">
                                     <textarea id="clinical_expense_diagnosis" name="clinical_expense_diagnosis"
                                         rows="4"></textarea>
+                                        <span class="text-danger">{{ $errors->first('clinical_expense_diagnosis') }}</span>
                                 </div>
                             </div>
 
@@ -489,6 +444,7 @@
                                 <div class="col-md-4">Total Claimed Expense(s):</div>
                                 <div class="col-md-5">
                                     <input type="text" name="clinical_expense_total_expense" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('clinical_expense_total_expense') }}</span>
                                 </div>
                             </div>
 
@@ -496,6 +452,7 @@
                                 <div class="col-md-4">Upload (if any applicable) :</div>
                                 <div class="col-md-5">
                                     <input type="file" name="clinical_expense_uploaded_file" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('clinical_expense_uploaded_file') }}</span>
                                 </div>
                             </div>
                         </div>
@@ -506,7 +463,8 @@
                             <div class="row form-single margin-top-10">
                                 <div class="col-md-4">Date of Sickness / Injury:</div>
                                 <div class="col-md-5">
-                                    <input type="text" name="surgical_injury_date" placeholder="">
+                                    <input type="date" name="surgical_injury_date" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('surgical_injury_date') }}</span>
                                 </div>
                             </div>
 
@@ -515,6 +473,7 @@
                                 <div class="col-md-5">
                                     <textarea id="surgical_incident_description" name="surgical_incident_description"
                                         rows="4"></textarea>
+                                        <span class="text-danger">{{ $errors->first('surgical_incident_description') }}</span>
                                 </div>
                             </div>
 
@@ -523,6 +482,7 @@
                                 <div class="col-md-5">
                                     <textarea id="surgical_incident_diagnosis" name="surgical_incident_diagnosis"
                                         rows="4"></textarea>
+                                        <span class="text-danger">{{ $errors->first('surgical_incident_diagnosis') }}</span>
                                 </div>
                             </div>
 
@@ -530,6 +490,7 @@
                                 <div class="col-md-4">Total Claimed Expense(s):</div>
                                 <div class="col-md-5">
                                     <input type="text" name="surgical_incident_total_expense" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('surgical_incident_total_expense') }}</span>
                                 </div>
                             </div>
 
@@ -537,6 +498,7 @@
                                 <div class="col-md-4">Upload (if any applicable) :</div>
                                 <div class="col-md-5">
                                     <input type="file" name="surgical_incident_uploaded_file" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('surgical_incident_uploaded_file') }}</span>
                                 </div>
                             </div>
                         </div>
@@ -547,7 +509,8 @@
                             <div class="row form-single margin-top-10">
                                 <div class="col-md-4">Date of Sickness / Injury:</div>
                                 <div class="col-md-5">
-                                    <input type="text" name="dental_expense_date" placeholder="">
+                                    <input type="date" name="dental_expense_date" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('dental_expense_date') }}</span>
                                 </div>
                             </div>
 
@@ -564,6 +527,7 @@
                                 <div class="col-md-5">
                                     <textarea id="dental_expense_diagnosis" name="dental_expense_diagnosis"
                                         rows="4"></textarea>
+                                        <span class="text-danger">{{ $errors->first('dental_expense_diagnosis') }}</span>
                                 </div>
                             </div>
 
@@ -571,6 +535,7 @@
                                 <div class="col-md-4">Total Claimed Expense(s):</div>
                                 <div class="col-md-5">
                                     <input type="text" name="dental_expense_total_expense" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('dental_expense_total_expense') }}</span>
                                 </div>
                             </div>
 
@@ -578,15 +543,10 @@
                                 <div class="col-md-4">Upload (if any applicable) :</div>
                                 <div class="col-md-5">
                                     <input type="file" name="dental_expense_uploaded_file" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('dental_expense_uploaded_file') }}</span>
                                 </div>
                             </div>
                         </div>
-
-                    </div>
-                    <!-- clinicalSurgicalDental -->
-
-                    <!-- cashAllowanceReplacement -->
-                    <div id="cashAllowanceReplacement" class="tab-content-single dispaly-none">
                         
                         <h3 class="form-heading margin-top-20 blue">Loss of Services Cash Allowance (Benefit 7)</h3>
                         <div class="form-detailss margin-top-20">
@@ -594,7 +554,8 @@
                             <div class="row form-single margin-top-10">
                                 <div class="col-md-4">Date of Medical Consulation:</div>
                                 <div class="col-md-5">
-                                    <input type="text" name="cash_allowance_injury_date" placeholder="">
+                                    <input type="date" name="cash_allowance_injury_date" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('cash_allowance_injury_date') }}</span>
                                 </div>
                             </div>
 
@@ -603,6 +564,7 @@
                                 <div class="col-md-5">
                                     <textarea id="cash_allowance_diagnosis" name="cash_allowance_diagnosis"
                                         rows="4"></textarea>
+                                        <span class="text-danger">{{ $errors->first('cash_allowance_diagnosis') }}</span>
                                 </div>
                             </div>
 
@@ -614,10 +576,12 @@
                                             <span class="input-group-text" id="">From</span>
                                         </div>
                                         <input type="date" name="cash_allowance_period_from" class="form-control">
+                                        <span class="text-danger">{{ $errors->first('cash_allowance_period_from') }}</span>
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="">To</span>
                                         </div>
                                         <input type="date" name="cash_allowance_period_to" class="form-control">
+                                        <span class="text-danger">{{ $errors->first('cash_allowance_period_to') }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -626,6 +590,7 @@
                                 <div class="col-md-4">Upload (if any applicable) :</div>
                                 <div class="col-md-5">
                                     <input type="file" name="cash_allowance_uploaded_file" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('cash_allowance_uploaded_file') }}</span>
                                 </div>
                             </div>
                         </div>
@@ -638,6 +603,7 @@
                                 <div class="col-md-5">
                                     <textarea id="replacement_reason" name="replacement_reason"
                                         rows="4"></textarea>
+                                        <span class="text-danger">{{ $errors->first('replacement_reason') }}</span>
                                 </div>
                             </div>
 
@@ -645,6 +611,7 @@
                                 <div class="col-md-4">Total Claimed Expense(s):</div>
                                 <div class="col-md-5">
                                     <input type="text" name="replacement_total_expense" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('replacement_total_expense') }}</span>
                                 </div>
                             </div>
 
@@ -652,14 +619,16 @@
                                 <div class="col-md-4">Upload (if any applicable) :</div>
                                 <div class="col-md-5">
                                     <input type="file" name="replacement_uploaded_file" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('replacement_uploaded_file') }}</span>
                                 </div>
                             </div>
                         </div>
 
                     </div>
-                    <!-- cashAllowanceReplacement -->
+                    <!-- Claims Information -->
 
-                    <div id="declaration" class="tab-content-single dispaly-none">
+                    <!-- Declaration & Authorization -->
+                    <div id="declarationAuthorization" class="tab-content-single dispaly-none">
                         <div class="form-detailss margin-top-20">
 
                             <div class="row form-single margin-top-10">
@@ -696,15 +665,38 @@
                                     <input type="checkbox" name="agree" value="yes"> Yes, please give particulars (any
                                     written communication being received must be forwarded to us immediately unanswered for
                                     our handling)<br>
+                                    <span class="text-danger">{{ $errors->first('agree') }}</span>
                                 </div>
                             </div>
 
+                        </div>
+                    </div>
+                    <!-- Declaration & Authorization -->
+
+                    <!-- End Section -->
+                    <div id="endSection" class="tab-content-single dispaly-none">
+                        <div class="form-detailss margin-top-20">
+                            <div class="row form-single margin-top-10">
+                                <div class="col-md-4">Name of Applicant:</div>
+                                <div class="col-md-5">
+                                    <input type="text" name="applicant_name" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('applicant_name') }}</span>
+                                </div>
+                            </div>
+                            <div class="row form-single margin-top-10">
+                                <div class="col-md-4">Submission Date :</div>
+                                <div class="col-md-5">
+                                    <input type="date" name="submission_date" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('submission_date') }}</span>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="margin-top-20 text-center">
                             <button type="submit" class="btn btn-outline-danger employee-submit">Save</button>
                         </div>
                     </div>
+                    <!-- End Section -->
                 </div>
 
                 <div class="tab-content-prev-next row">

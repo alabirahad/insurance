@@ -54,34 +54,29 @@
 
         <div class="content-body">
             <div class="row tab-heading margin-top-40">
-                <div class="col-md-2 tab-heading-item">
-                    <button data-id="contactPolicy" class="tab-heading-btn tab-heading-btn-active">
-                        Contact & Policy Information
+                <div class="tab-heading-item">
+                    <button data-id="policyInfo" class="tab-heading-btn tab-heading-btn-active">
+                        Policy Information
                     </button>
                 </div>
-                <div class="col-md-2 tab-heading-item">
-                    <button data-id="genaralClaim" class="tab-heading-btn">
-                        General Claim Information
+                <div class="tab-heading-item">
+                    <button data-id="contactInfo" class="tab-heading-btn">
+                        Contact Information
                     </button>
                 </div>
-                <div class="col-md-2 tab-heading-item">
-                    <button data-id="lossDamage" class="tab-heading-btn">
-                        Loss or damaged to Contents / Stock
+                <div class="tab-heading-item">
+                    <button data-id="claimsInfo" class="tab-heading-btn">
+                        Claims Information 
                     </button>
                 </div>
-                <div class="col-md-2 tab-heading-item">
-                    <button data-id="lossLiabilityPersonal" class="tab-heading-btn">
-                        Loss of Money, Public Liability, Personal Assault
-                    </button>
-                </div>
-                <div class="col-md-2 tab-heading-item">
-                    <button data-id="othersClaim" class="tab-heading-btn">
-                        Plate Glass, Employee's Compensation , Others Claim Information
-                    </button>
-                </div>
-                <div class="col-md-2 tab-heading-item">
-                    <button data-id="declaration" class="tab-heading-btn">
+                <div class="tab-heading-item">
+                    <button data-id="declarationAuthorization" class="tab-heading-btn">
                         Declaration & Authorization
+                    </button>
+                </div>
+                <div class="tab-heading-item">
+                    <button data-id="endSection" class="tab-heading-btn">
+                        End Section
                     </button>
                 </div>
             </div>
@@ -111,8 +106,8 @@
                 @csrf
 
                 <div class="tab-content margin-top-20">
-                    <!-- contact & privecy form -->
-                    <div id="contactPolicy" class="tab-content-single">
+                    <!--  privecy form -->
+                    <div id="policyInfo" class="tab-content-single">
                         <h3 class="form-heading margin-top-20 blue">Policy Details</h3>
                         <div class="form-detailss margin-top-20">
 
@@ -120,6 +115,7 @@
                                 <div class="col-md-4">Policy No.</div>
                                 <div class="col-md-5">
                                     <input type="text" name="policy_no" placeholder="XXX/99999/99">
+                                    <span class="text-danger">{{ $errors->first('policy_no') }}</span>
                                 </div>
                             </div>
 
@@ -127,6 +123,7 @@
                                 <div class="col-md-4">Name of policy holder:</div>
                                 <div class="col-md-5">
                                     <input type="text" name="policy_holder_name" placeholder="Mr. X">
+                                    <span class="text-danger">{{ $errors->first('policy_holder_name') }}</span>
                                 </div>
                             </div>
 
@@ -134,6 +131,7 @@
                                 <div class="col-md-4">Name of the insured:</div>
                                 <div class="col-md-5">
                                     <input type="text" name="insured_name" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('insured_name') }}</span>
                                 </div>
                             </div>
 
@@ -141,6 +139,7 @@
                                 <div class="col-md-4">Name of the claimant:</div>
                                 <div class="col-md-5">
                                     <input type="text" name="claimant_name" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('claimant_name') }}</span>
                                 </div>
                             </div>
 
@@ -150,7 +149,11 @@
                             </div>
 
                         </div>
+                    </div>
+                    <!-- privecy form -->
 
+                    <!-- contact Information -->
+                    <div id="contactInfo" class="tab-content-single dispaly-none ">
                         <h3 class="form-heading margin-top-20 blue">Contact Information</h3>
                         <div class="form-detailss margin-top-20">
 
@@ -158,6 +161,7 @@
                                 <div class="col-md-4">Name of contact person:</div>
                                 <div class="col-md-5">
                                     <input type="text" name="contact_person_name" placeholder="Mr. X">
+                                    <span class="text-danger">{{ $errors->first('contact_person_name') }}</span>
                                 </div>
                             </div>
 
@@ -165,6 +169,7 @@
                                 <div class="col-md-4">Email address:</div>
                                 <div class="col-md-5">
                                     <input type="text" name="contact_person_email" placeholder="x@gmail.com">
+                                    <span class="text-danger">{{ $errors->first('contact_person_email') }}</span>
                                 </div>
                             </div>
 
@@ -172,14 +177,15 @@
                                 <div class="col-md-4">Mobile no.:</div>
                                 <div class="col-md-5">
                                     <input type="text" name="contact_person_mobile" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('contact_person_mobile') }}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- contact & privecy form -->
+                    <!-- contact Information -->
 
-                    <!-- claim Information -->
-                    <div id="genaralClaim" class="tab-content-single dispaly-none ">
+                    {{-- Claims Information  --}}
+                    <div id="claimsInfo" class="tab-content-single dispaly-none">
                         <h3 class="form-heading margin-top-20 blue">Claim Information</h3>
                         <div class="form-detailss margin-top-20">
 
@@ -199,13 +205,15 @@
                                     <input type="checkbox" name="claim_types[]" value="employee_compensation">Employee's
                                     Compensation <br>
                                     <input type="checkbox" name="claim_types[]" value="others">Others <br>
+                                    <span class="text-danger">{{ $errors->first('claim_types') }}</span>
                                 </div>
                             </div>
 
                             <div class="row form-single margin-top-10">
                                 <div class="col-md-4">Date & time of accident :</div>
                                 <div class="col-md-5">
-                                    <input type="text" name="accident_time" placeholder="">
+                                    <input type="date" name="accident_date" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('accident_date') }}</span>
                                 </div>
                             </div>
 
@@ -213,6 +221,7 @@
                                 <div class="col-md-4">Location of incident :</div>
                                 <div class="col-md-5">
                                     <input type="text" name="incident_location" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('incident_location') }}</span>
                                 </div>
                             </div>
 
@@ -220,6 +229,7 @@
                                 <div class="col-md-4">Description of incident:</div>
                                 <div class="col-md-5">
                                     <textarea id="incident_description" name="incident_description" rows="4"></textarea>
+                                    <span class="text-danger">{{ $errors->first('incident_description') }}</span>
                                     <!-- <input type="text" name="incident_description" placeholder=""> -->
                                 </div>
                             </div>
@@ -231,8 +241,11 @@
                                     <input type="radio" name="claim_q1" value="yes"> Yes, please state how did the culprit(s)
                                     enter the premises.
                                     enter the premises. <br>
+                                    <textarea name="claim_q1_description" rows="4" class=""></textarea><br>
+                                    <span class="text-danger">{{ $errors->first('claim_q1_description') }}</span>
                                     <input type="radio" name="claim_q1" value="no">No <br>
                                     <input type="radio" name="claim_q1" value="not_applicable">Not applicable <br>
+                                    <span class="text-danger">{{ $errors->first('claim_q1') }}</span>
                                 </div>
                             </div>
 
@@ -242,7 +255,10 @@
                                 <div class="col-md-5">
                                     <input type="radio" name="claim_q2" value="yes"> Yes, please state details (e.g. police
                                     report number, etc) <br>
+                                    <textarea name="claim_q2_description" rows="4" class=""></textarea><br>
+                                    <span class="text-danger">{{ $errors->first('claim_q2_description') }}</span>
                                     <input type="radio" name="claim_q2" value="no">No <br>
+                                    <span class="text-danger">{{ $errors->first('claim_q2') }}</span>
                                 </div>
                             </div>
 
@@ -251,7 +267,10 @@
                                     against any other part(ies) concerning the loss/damage? </div>
                                 <div class="col-md-5">
                                     <input type="radio" name="claim_q3" value="yes"> Yes, please state details<br>
-                                    <input type="checkbox" name="claim_q3" value="no">No <br>
+                                    <textarea name="claim_q3_description" rows="4" class=""></textarea><br>
+                                    <span class="text-danger">{{ $errors->first('claim_q3_description') }}</span>
+                                    <input type="radio" name="claim_q3" value="no">No <br>
+                                    <span class="text-danger">{{ $errors->first('claim_q3') }}</span>
                                 </div>
                             </div>
 
@@ -261,6 +280,7 @@
                                 <div class="col-md-5">
                                     <input type="radio" name="claim_q4" value="yes"> Yes<br>
                                     <input type="radio" name="claim_q4" value="no">No <br>
+                                    <span class="text-danger">{{ $errors->first('claim_q4') }}</span>
                                 </div>
                             </div>
 
@@ -269,16 +289,15 @@
                                     the Insured propert(ies) as a result of the same incident? </div>
                                 <div class="col-md-5">
                                     <input type="radio" name="claim_q5" value="yes"> Yes, please state details<br>
+                                    <textarea name="claim_q5_description" rows="4" class=""></textarea><br>
+                                    <span class="text-danger">{{ $errors->first('claim_q5_description') }}</span>
                                     <input type="radio" name="claim_q5" value="no">No <br>
+                                    <span class="text-danger">{{ $errors->first('claim_q5') }}</span>
                                 </div>
                             </div>
 
                         </div>
-                    </div>
-                    <!-- claim Information -->
 
-                    {{-- Loss / damage to Home --}}
-                    <div id="lossDamage" class="tab-content-single dispaly-none">
                         <h3 class="form-heading margin-top-20 blue">Details of damaged or lost properties</h3>
                         <div class="form-detailss margin-top-20">
                             <table class="table table-bordered">
@@ -315,21 +334,27 @@
                                         <td class="text-center initial-serial">1</td>
                                         <td>
                                             <input type="text" name="loss_damage_property_description[]" placeholder="">
+                                            <span class="text-danger">{{ $errors->first('loss_damage_property_description') }}</span>
                                         </td>
                                         <td>
                                             <input type="text" name="loss_damage_purchage_date[]" placeholder="">
+                                            <span class="text-danger">{{ $errors->first('loss_damage_purchage_date') }}</span>
                                         </td>
                                         <td>
                                             <input type="text" name="loss_damage_purchage_price[]" placeholder="">
+                                            <span class="text-danger">{{ $errors->first('loss_damage_purchage_price') }}</span>
                                         </td>
                                         <td>
                                             <input type="text" name="loss_damage_repair_cost[]" placeholder="">
+                                            <span class="text-danger">{{ $errors->first('loss_damage_repair_cost') }}</span>
                                         </td>
                                         <td>
                                             <input type="text" name="loss_damage_claim_amount[]" placeholder="">
+                                            <span class="text-danger">{{ $errors->first('loss_damage_claim_amount') }}</span>
                                         </td>
                                         <td>
                                             <input type="text" name="loss_damage_total[]" placeholder="">
+                                            <span class="text-danger">{{ $errors->first('loss_damage_total') }}</span>
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-success add-btn">Add</button>
@@ -369,18 +394,23 @@
                                         <td class="text-center initial-serial">1</td>
                                         <td>
                                             <input type="text" name="loss_damage_item_description[]" placeholder="">
+                                            <span class="text-danger">{{ $errors->first('loss_damage_item_description') }}</span>
                                         </td>
                                         <td>
                                             <input type="text" name="loss_damage_item_reason_cost[]" placeholder="">
+                                            <span class="text-danger">{{ $errors->first('loss_damage_item_reason_cost') }}</span>
                                         </td>
                                         <td>
                                             <input type="text" name="loss_damage_item_purchage_date[]" placeholder="">
+                                            <span class="text-danger">{{ $errors->first('loss_damage_item_purchage_date') }}</span>
                                         </td>
                                         <td>
                                             <input type="text" name="loss_damage_item_claim_amount[]" placeholder="">
+                                            <span class="text-danger">{{ $errors->first('loss_damage_item_claim_amount') }}</span>
                                         </td>
                                         <td>
                                             <input type="text" name="loss_damage_item_total[]" placeholder="">
+                                            <span class="text-danger">{{ $errors->first('loss_damage_item_total') }}</span>
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-success add-btn-item">Add</button>
@@ -393,12 +423,14 @@
                                 <div class="col-md-4">Total claimed amount :</div>
                                 <div class="col-md-5">
                                     <input type="text" name="loss_damage_total_claimed_amount" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('loss_damage_total_claimed_amount') }}</span>
                                 </div>
                             </div>
                             <div class="row form-single margin-top-20">
                                 <div class="col-md-4">Upload (if any applicable) :</div>
                                 <div class="col-md-5">
                                     <input type="file" name="loss_damage_uploaded_file[]" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('loss_damage_uploaded_file') }}</span>
                                 </div>
                             </div>
                             <div class="row form-single margin-top-20">
@@ -408,7 +440,6 @@
 
                             </div>
                         </div>
-
 
                         <h3 class="form-heading margin-top-20 blue">Business Interruption</h3>
                         <div class="form-detailss margin-top-20">
@@ -420,10 +451,12 @@
                                             <span class="input-group-text" id="">From</span>
                                         </div>
                                         <input type="date" name="business_interruption_period_from" class="form-control">
+                                        <span class="text-danger">{{ $errors->first('business_interruption_period_from') }}</span>
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="">To</span>
                                         </div>
                                         <input type="date" name="business_interruption_period_to" class="form-control">
+                                        <span class="text-danger">{{ $errors->first('business_interruption_period_to') }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -459,20 +492,25 @@
                                             <td>
                                                 <input type="text" name="business_interruption_description[]"
                                                     placeholder="">
+                                                    <span class="text-danger">{{ $errors->first('business_interruption_description') }}</span>
                                             </td>
                                             <td>
                                                 <input type="text" name="business_interruption_reason_cost[]"
                                                     placeholder="">
+                                                    <span class="text-danger">{{ $errors->first('business_interruption_reason_cost') }}</span>
                                             </td>
                                             <td>
                                                 <input type="text" name="business_interruption_date[]" placeholder="">
+                                                <span class="text-danger">{{ $errors->first('business_interruption_date') }}</span>
                                             </td>
                                             <td>
                                                 <input type="text" name="business_interruption_claim_amount[]"
                                                     placeholder="">
+                                                    <span class="text-danger">{{ $errors->first('business_interruption_claim_amount') }}</span>
                                             </td>
                                             <td>
                                                 <input type="text" name="business_interruption_item_total[]" placeholder="">
+                                                <span class="text-danger">{{ $errors->first('business_interruption_item_total') }}</span>
                                             </td>
                                             <td>
                                                 <button type="button"
@@ -485,16 +523,12 @@
                                     <div class="col-md-4">Upload (if any applicable) :</div>
                                     <div class="col-md-5">
                                         <input type="file" name="business_interruption_uploaded_file[]" placeholder="">
+                                        <span class="text-danger">{{ $errors->first('business_interruption_uploaded_file') }}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                    </div>
-                    {{-- Loss / damage to Home --}}
-
-                    <!-- lossLiabilityPersonal -->
-                    <div id="lossLiabilityPersonal" class="tab-content-single dispaly-none">
                         <h3 class="form-heading margin-top-20 blue">Loss of Money</h3>
                         <div class="form-detailss margin-top-20">
 
@@ -510,6 +544,7 @@
                                 <div class="col-md-4">Total claimed amount:</div>
                                 <div class="col-md-5">
                                     <input type="text" name="loss_money_claim_amount" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('loss_money_claim_amount') }}</span>
                                 </div>
                             </div>
 
@@ -517,6 +552,7 @@
                                 <div class="col-md-4">Upload (if any applicable) :</div>
                                 <div class="col-md-5">
                                     <input type="file" name="loss_money_uploaded_file[]" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('loss_money_uploaded_file') }}</span>
                                 </div>
                             </div>
 
@@ -530,6 +566,7 @@
                                 <div class="col-md-4">Name of property owner:</div>
                                 <div class="col-md-5">
                                     <input type="text" name="public_liability_owner_name" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('public_liability_owner_name') }}</span>
                                 </div>
                             </div>
 
@@ -538,6 +575,7 @@
                                 <div class="col-md-5">
                                     <textarea id="public_liability_detaile_damage" name="public_liability_detaile_damage"
                                         rows="4"></textarea>
+                                        <span class="text-danger">{{ $errors->first('public_liability_detaile_damage') }}</span>
                                 </div>
                             </div>
 
@@ -549,6 +587,7 @@
                                 <div class="col-md-4">Name of the injured:</div>
                                 <div class="col-md-5">
                                     <input type="text" name="injured_name" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('injured_name') }}</span>
                                 </div>
                             </div>
 
@@ -556,6 +595,7 @@
                                 <div class="col-md-4">Details & extent of injury of other(s): </div>
                                 <div class="col-md-5">
                                     <textarea id="injury_description" name="injury_description" rows="4"></textarea>
+                                    <span class="text-danger">{{ $errors->first('injury_description') }}</span>
                                 </div>
                             </div>
 
@@ -565,7 +605,10 @@
                                 <div class="col-md-5">
                                     <input type="radio" name="laiabilityq1" value="yes"> Yes, please state the name(s),
                                     address(es) & telephone No.(s) of the wrongdoer(s)<br>
-                                    <input type="radio" name="laiabilityq1" value="no">No <br>
+                                    <textarea name="laiabilityq1_description" rows="4" class=""></textarea><br>
+                                    <span class="text-danger">{{ $errors->first('laiabilityq1_description') }}</span>
+                                     <input type="radio" name="laiabilityq1" value="no">No <br>
+                                    <span class="text-danger">{{ $errors->first('laiabilityq1') }}</span>
                                 </div>
                             </div>
 
@@ -576,7 +619,10 @@
                                     <input type="radio" name="laiabilityq2" value="yes"> Yes, please give particulars
                                     (any written communication being received must be forwarded to us immediately unanswered
                                     for our handling)<br>
-                                    <input type="radio" name="laiabilityq2" value="no">No <br>
+                                    <textarea name="laiabilityq2_description" rows="4" class=""></textarea><br>
+                                    <span class="text-danger">{{ $errors->first('laiabilityq2_description') }}</span>
+                                     <input type="radio" name="laiabilityq2" value="no">No <br>
+                                    <span class="text-danger">{{ $errors->first('laiabilityq2') }}</span>
                                 </div>
                             </div>
 
@@ -587,7 +633,10 @@
                                     <input type="radio" name="laiabilityq3" value="yes"> Yes, please state the nature
                                     and by whom it was carried out with any compensation amount and withhold any further
                                     communication with any involved part(ies).<br>
-                                    <input type="radio" name="laiabilityq3" value="no">No <br>
+                                    <textarea name="laiabilityq3_description" rows="4" class=""></textarea><br>
+                                    <span class="text-danger">{{ $errors->first('laiabilityq3_description') }}</span>
+                                     <input type="radio" name="laiabilityq3" value="no">No <br>
+                                    <span class="text-danger">{{ $errors->first('laiabilityq3') }}</span>
                                 </div>
                             </div>
 
@@ -596,6 +645,7 @@
                                 <div class="col-md-4">Upload (if any applicable)</div>
                                 <div class="col-md-5">
                                     <input type="file" name="injured_file[]" id="">
+                                    <span class="text-danger">{{ $errors->first('injured_file') }}</span>
                                 </div>
                             </div>
                         </div>
@@ -607,12 +657,14 @@
                                 <div class="col-md-4">Name of injured employee:</div>
                                 <div class="col-md-5">
                                     <input type="text" name="personal_assault_name" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('personal_assault_name') }}</span>
                                 </div>
                             </div>
                             <div class="row form-single margin-top-10">
                                 <div class="col-md-4">Name of Claimant:</div>
                                 <div class="col-md-5">
                                     <input type="text" name="personal_assault_name_claimant" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('personal_assault_name_claimant') }}</span>
                                 </div>
                             </div>
 
@@ -621,6 +673,7 @@
                                 <div class="col-md-5">
                                     <textarea id="personal_assault_reason" name="personal_assault_reason"
                                         rows="4"></textarea>
+                                        <span class="text-danger">{{ $errors->first('personal_assault_reason') }}</span>
                                 </div>
                             </div>
 
@@ -628,16 +681,12 @@
                                 <div class="col-md-4">Upload (if any applicable) :</div>
                                 <div class="col-md-5">
                                     <input type="file" name="personal_assault_uploaded_file[]" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('personal_assault_uploaded_file') }}</span>
                                 </div>
                             </div>
 
                         </div>
 
-                    </div>
-                    <!-- lossLiabilityPersonal -->
-
-                    <!-- others -->
-                    <div id="othersClaim" class="tab-content-single dispaly-none">
                         <h3 class="form-heading margin-top-20 blue">Plate Glass</h3>
                         <div class="form-detailss margin-top-20">
 
@@ -653,6 +702,7 @@
                                 <div class="col-md-4">Total claimed amount:</div>
                                 <div class="col-md-5">
                                     <input type="text" name="plate_glass_claim_amount" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('plate_glass_claim_amount') }}</span>
                                 </div>
                             </div>
 
@@ -660,6 +710,7 @@
                                 <div class="col-md-4">Upload (if any applicable) :</div>
                                 <div class="col-md-5">
                                     <input type="file" name="plate_glass_uploaded_file[]" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('plate_glass_uploaded_file') }}</span>
                                 </div>
                             </div>
                         </div>
@@ -696,7 +747,8 @@
                                 <div class="row form-single margin-top-10">
                                     <div class="col-md-4">Date of injury:</div>
                                     <div class="col-md-5">
-                                        <input type="text" name="employee_compensation_injury_date" placeholder="">
+                                        <input type="date" name="employee_compensation_injury_date" placeholder="">
+                                        <span class="text-danger">{{ $errors->first('employee_compensation_injury_date') }}</span>
                                     </div>
                                 </div>
 
@@ -705,6 +757,7 @@
                                     <div class="col-md-5">
                                         <textarea id="employee_compensation_incident_description" name="employee_compensation_incident_description"
                                             rows="4"></textarea>
+                                            <span class="text-danger">{{ $errors->first('employee_compensation_incident_description') }}</span>
                                     </div>
                                 </div>
                                 <div class="row form-single margin-top-10">
@@ -715,10 +768,12 @@
                                                 <span class="input-group-text" id="">From</span>
                                             </div>
                                             <input type="date" name="employee_compensation_sick_leave_from" class="form-control">
+                                            <span class="text-danger">{{ $errors->first('employee_compensation_sick_leave_from') }}</span>
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="">To</span>
                                             </div>
                                             <input type="date" name="employee_compensation_sick_leave_to" class="form-control">
+                                            <span class="text-danger">{{ $errors->first('employee_compensation_sick_leave_to') }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -728,6 +783,7 @@
                                     <div class="col-md-5">
                                         <textarea id="employee_compensation_injury_nature" name="employee_compensation_injury_nature"
                                             rows="4"></textarea>
+                                            <span class="text-danger">{{ $errors->first('employee_compensation_injury_nature') }}</span>
                                     </div>
                                 </div>
 
@@ -735,6 +791,7 @@
                                     <div class="col-md-4">Upload (if any applicable) :</div>
                                     <div class="col-md-5">
                                         <input type="file" name="employee_compensation_uploaded_file[]" placeholder="">
+                                        <span class="text-danger">{{ $errors->first('employee_compensation_uploaded_file') }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -747,6 +804,7 @@
                                 <div class="col-md-4">Reason of claim:</div>
                                 <div class="col-md-5">
                                     <textarea id="resons_claim" name="resons_claim" rows="4"></textarea>
+                                    <span class="text-danger">{{ $errors->first('resons_claim') }}</span>
                                 </div>
                             </div>
 
@@ -754,14 +812,19 @@
                                 <div class="col-md-4">Total claimed amount:</div>
                                 <div class="col-md-5">
                                     <input type="text" name="claim_amount" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('claim_amount') }}</span>
                                 </div>
                             </div>
 
                         </div>
-                    </div>
-                    <!-- others -->
 
-                    <div id="declaration" class="tab-content-single dispaly-none">
+
+                    </div>
+                    {{-- Claims Information  --}}
+
+                    <!-- Declaration & Authorization -->
+                    <div id="declarationAuthorization" class="tab-content-single dispaly-none">
+
                         <div class="form-detailss margin-top-20">
 
                             <div class="row form-single margin-top-10">
@@ -798,15 +861,38 @@
                                     <input type="checkbox" name="agree" value="yes"> Yes, please give particulars (any
                                     written communication being received must be forwarded to us immediately unanswered for
                                     our handling)<br>
+                                    <span class="text-danger">{{ $errors->first('agree') }}</span>
                                 </div>
                             </div>
 
+                        </div>
+                    </div>
+                    <!-- Declaration & Authorization -->
+
+                    <!-- endSection -->
+                    <div id="endSection" class="tab-content-single dispaly-none">
+                        <div class="form-detailss margin-top-20">
+                            <div class="row form-single margin-top-10">
+                                <div class="col-md-4">Name of Applicant:</div>
+                                <div class="col-md-5">
+                                    <input type="text" name="applicant_name" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('applicant_name') }}</span>
+                                </div>
+                            </div>
+                            <div class="row form-single margin-top-10">
+                                <div class="col-md-4">Submission Date :</div>
+                                <div class="col-md-5">
+                                    <input type="date" name="submission_date" placeholder="">
+                                    <span class="text-danger">{{ $errors->first('submission_date') }}</span>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="margin-top-20 text-center">
                             <button type="submit" class="btn btn-outline-danger employee-submit">Save</button>
                         </div>
                     </div>
+                    <!-- endSection -->
                 </div>
 
                 <div class="tab-content-prev-next row">
