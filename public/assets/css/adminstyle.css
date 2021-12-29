@@ -322,3 +322,6 @@ input[type="radio"] {
     margin: 0 !important;
     padding: 0 !important;
 }
+.main-content-body{
+    padding: 20px;
+}

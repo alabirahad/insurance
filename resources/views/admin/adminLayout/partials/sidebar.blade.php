@@ -12,7 +12,7 @@ $currentFullRouteName = Route::getFacadeRoot()
             <div class="nav-bar margin-top-20">
                 <ul>
                     <li>
-                        <a href="/admin" class="{{ $currentControllerName == 'admin' || '' ? 'activeNav' : '' }}">User</a>
+                        <a href="/admin" class="{{ $currentControllerName == 'admin' || '' ? 'activeNav' : '' }}">Admin</a>
                     </li>
                     
                     <li>
