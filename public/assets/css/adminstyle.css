@@ -325,3 +325,19 @@ input[type="radio"] {
 .main-content-body{
     padding: 20px;
 }
+.table-action {
+    background: none;
+    border: 1px solid;
+    padding: 3px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: rgb(32, 32, 32);
+}
+.edit-btn:hover{
+    background-color: #19185F;
+    color: white;
+}
+.delete-btn:hover{
+    background-color: #E11F27;
+    color: white;
+}

@@ -49,6 +49,15 @@ Route::post('/off-shop-claim-form/store', [OfficeShopClaimController::class, "st
 
 //admin pannel
 Route::get('/admin', [AdminController::class, "index"]);
+Route::delete('/admin/{id}', [AdminController::class, "adminDestroy"]);
+Route::get('/admin/create', [AdminController::class, "adminCreate"]);
+Route::post('/admin/store', [AdminController::class, "adminStore"]);
+Route::get('/admin/{id}/edit', [AdminController::class, "adminEdit"]);
+Route::post('/admin/{id}/update', [AdminController::class, "adminUpdate"]);
+
+Route::delete('/admin-employee-claim/{id}', [AdminController::class, "employeeClaimDestroy"]);
+Route::delete('/admin-home-claim/{id}', [AdminController::class, "homeClaimDestroy"]);
+Route::delete('/admin-off-shop-claim/{id}', [AdminController::class, "officeClaimDestroy"]);
 Route::get('/admin-employee-claim', [AdminController::class, "employeeClaim"]);
 Route::get('/admin-home-claim', [AdminController::class, "homeClaim"]);
 Route::get('/admin-off-shop-claim', [AdminController::class, "offShopClaim"]);

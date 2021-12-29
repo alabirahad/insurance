@@ -14,6 +14,7 @@ use Redirect;
 use Response;
 use Session;
 use Validator;
+use Hash;
 
 class AdminController extends Controller
 {
@@ -23,11 +24,125 @@ class AdminController extends Controller
         return view('admin.index')->with(compact('user'));
     }
 
+    public function adminDestroy(Request $request, $id)
+    {
+        $target = User::find($id);
+        if (empty($target)) {
+            Session::flash('error', 'Invalid Data Id');
+        }
+        if ($target->delete()) {
+            Session::flash('success', "Admin Delete Successfully!");
+            return redirect()->back();
+        } else {
+            Session::flash('error', "Admin Delete Unsuccessfully!");
+            return redirect()->back();
+        }
+        return redirect('/admin');
+    }
+
+     public function adminCreate(Request $request)
+    {
+        return view('admin.adminCreate');
+    }
+
+    public function adminStore(Request $request)
+    {
+        try {
+            // dd($request->all());
+            $validate = Validator::make(request()->all(), [
+                'name'     => 'required|regex:/^[a-zA-Z-. ]+$/u',
+                'email'    => 'required|unique:users|email:rfc,dns',
+                'password' => 'min:6|required',
+            ]);
+            if ($validate->fails()) {
+                return redirect('admin/create')
+                    ->withInput()
+                    ->withErrors($validate);
+            }
+
+            $target                 = new User;
+            $target->name           = $request->name;
+            $target->email          = $request->email;
+            $target->password       = Hash::make($request->password);
+            if ($target->save()) {
+                Session::flash('success', "Admin Created Successfully!");
+                return redirect('admin');
+            } else {
+                Session::flash('error', "Admin Create Unuccessfull!");
+                return redirect('admin/create');
+            }
+        } catch (\Exception$e) {
+            return response([
+                'status'  => 'server_error',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+    
+    public function adminEdit(Request $request, $id)
+    {
+        $target = User::where('id', $id)->first();
+        return view('admin.adminEdit')->with(compact('target'));
+    }
+
+    public function adminUpdate(Request $request, $id)
+    {
+        try {
+            $validate = Validator::make(request()->all(), [
+                'name'   => 'required|regex:/^[a-zA-Z-. ]+$/u',
+                'email'  => 'required|email:rfc,dns|unique:users,id,' . $request->id,
+            ]);
+
+            if ($validate->fails()) {
+                return redirect('admin/' . $request->id . '/edit')
+                    ->withInput()
+                    ->withErrors($validate);
+            }
+            $target        = User::where('id', $request->id)->first();
+            $target->name  = $request->name ?? $target->name;
+            $target->email = $request->email ?? $target->email;
+
+            if ($target->update()) {
+                Session::flash('success', "Admin Updated Successfully!");
+                return redirect('admin');
+            } else {
+                Session::flash('error', "Admin Update Unuccessfull!");
+                return redirect('admin/' . $request->id . '/edit');
+            }
+        } catch (\Exception$e) {
+            return response([
+                'status'  => 'server_error',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+
+
+
+
     public function employeeClaim(Request $request)
     {
         $EmployeeClaim    = EmployeeClaim::get();
         return view('admin.employeeClaim')->with(compact('EmployeeClaim'));
     }
+
+    public function employeeClaimDestroy(Request $request, $id)
+    {
+        $target = EmployeeClaim::find($id);
+        if (empty($target)) {
+            Session::flash('error', 'Invalid Data Id');
+        }
+        if ($target->delete()) {
+            Session::flash('success', "Claim Delete Successfully!");
+            return redirect()->back();
+        } else {
+            Session::flash('error', "Claim Delete Unsuccessfully!");
+            return redirect()->back();
+        }
+        return redirect('/admin-employee-claim');
+    }
+
     
     public function homeClaim(Request $request)
     {
@@ -35,119 +150,43 @@ class AdminController extends Controller
         return view('admin.homeClaim')->with(compact('HomeClaim'));
     }
 
+    public function homeClaimDestroy(Request $request, $id)
+    {
+        $target = HomeClaim::find($id);
+        if (empty($target)) {
+            Session::flash('error', 'Invalid Data Id');
+        }
+        if ($target->delete()) {
+            Session::flash('success', "Claim Delete Successfully!");
+            return redirect()->back();
+        } else {
+            Session::flash('error', "Claim Delete Unsuccessfully!");
+            return redirect()->back();
+        }
+        return redirect('/admin-home-claim');
+    }
+
+
     public function offShopClaim(Request $request)
     {
         $OfficeShopClaim    = OfficeShopClaim::get();
         return view('admin.offShopClaim')->with(compact('OfficeShopClaim'));
     }
 
-    public function create(Request $request)
+    public function officeClaimDestroy(Request $request, $id)
     {
-
-        $view = view('country.create')->render();
-        return response()->json(['html' => $view]);
-    }
-
-    public function store(Request $request)
-    {
-        try {
-            $validate = Validator::make(request()->all(), [
-                'name'   => 'required|regex:/^[a-zA-Z-. ]+$/u|unique:countries',
-                'image'  => 'required',
-                'status' => Rule::in(['active', 'inactive']),
-            ]);
-
-            if ($validate->fails()) {
-                return Response::json(['success' => false, 'heading' => 'Validtion Error', 'message' => $validate->errors()], 422);
-            }
-
-            $image     = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalName();
-            $image->move(public_path('/uploads/country'), $imageName);
-
-            $target         = new Country;
-            $target->name   = $request->name;
-            $target->image  = $imageName ?? '';
-            $target->status = 'active';
-            // $target->updated_by = auth()->id();
-            // $target->created_by = auth()->id();
-            if ($target->save()) {
-                return Response::json(['success' => true], 200);
-            }
-        } catch (\Exception$e) {
-            return response([
-                'status'  => 'server_error',
-                'message' => $e->getMessage(),
-            ], 500);
-        }
-    }
-
-    public function edit(Request $request)
-    {
-        $target = Country::where('id', $request->id)->first();
-        $view   = view('country.edit', compact('target'))->render();
-        return response()->json(['html' => $view]);
-    }
-
-    public function update(Request $request)
-    {
-        try {
-            $validate = Validator::make(request()->all(), [
-                'name'   => 'required|regex:/^[a-zA-Z-. ]+$/u|unique:countries,id,' . $request->id,
-                'status' => Rule::in(['active', 'inactive']),
-            ]);
-            if ($validate->fails()) {
-                return Response::json(['success' => false, 'heading' => 'Validtion Error', 'message' => $validate->errors()], 422);
-            }
-
-            if (!empty($request->file('image'))) {
-                $image     = $request->file('image');
-                $imageName = time() . '.' . $image->getClientOriginalName();
-                $image->move(public_path('/uploads/country'), $imageName);
-            }
-
-            $target        = Country::where('id', $request->id)->first();
-            $target->name  = $request->name ?? $target->name;
-            $target->image = $imageName ?? $target->image;
-
-            if ($target->update()) {
-                return Response::json(['success' => true], 200);
-            }
-        } catch (\Exception$e) {
-            return response([
-                'status'  => 'server_error',
-                'message' => $e->getMessage(),
-            ], 500);
-        }
-    }
-
-    public function destroy(Request $request, $id)
-    {
-        $target = Country::find($id);
-
+        $target = OfficeShopClaim::find($id);
         if (empty($target)) {
             Session::flash('error', 'Invalid Data Id');
         }
-
-        $fileName = 'uploads/country/' . $target->image;
-        if (File::exists($fileName)) {
-            File::delete($fileName);
-        }
-
         if ($target->delete()) {
-            Session::flash('success', "Country Delete Successfully!");
+            Session::flash('success', "Claim Delete Successfully!");
             return redirect()->back();
         } else {
-            Session::flash('error', "Country Delete Unsuccessfully!");
+            Session::flash('error', "Claim Delete Unsuccessfully!");
             return redirect()->back();
         }
-        return redirect('/country');
-    }
-
-    public function filter(Request $request)
-    {
-        $url = 'fil_search=' . urlencode($request->fil_search);
-        return Redirect::to('country?' . $url);
+        return redirect('/admin-off-shop-claim');
     }
 
 }
