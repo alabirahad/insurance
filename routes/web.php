@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmployeeClaimController;
 use App\Http\Controllers\HomeClaimController;
 use App\Http\Controllers\OfficeShopClaimController;
@@ -45,3 +46,9 @@ Route::get('/off-shop-claim-form', function () {
     return view('offShopClaimForm');
 });
 Route::post('/off-shop-claim-form/store', [OfficeShopClaimController::class, "store"]);
+
+//admin pannel
+Route::get('/admin', [AdminController::class, "index"]);
+Route::get('/admin-employee-claim', [AdminController::class, "employeeClaim"]);
+Route::get('/admin-home-claim', [AdminController::class, "homeClaim"]);
+Route::get('/admin-off-shop-claim', [AdminController::class, "offShopClaim"]);
