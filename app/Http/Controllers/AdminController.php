@@ -2,25 +2,23 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Models\EmployeeClaim;
 use App\Models\HomeClaim;
 use App\Models\OfficeShopClaim;
-use App\Models\MgtStatus;
-use File;
+use App\Models\User;
+use Hash;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Redirect;
 use Response;
 use Session;
 use Validator;
-use Hash;
 
 class AdminController extends Controller
 {
+    //Start::admin mgt
     public function index(Request $request)
     {
-        $user    = User::get();
+        $user = User::get();
         return view('admin.index')->with(compact('user'));
     }
 
@@ -40,7 +38,7 @@ class AdminController extends Controller
         return redirect('/admin');
     }
 
-     public function adminCreate(Request $request)
+    public function adminCreate(Request $request)
     {
         return view('admin.adminCreate');
     }
@@ -60,10 +58,10 @@ class AdminController extends Controller
                     ->withErrors($validate);
             }
 
-            $target                 = new User;
-            $target->name           = $request->name;
-            $target->email          = $request->email;
-            $target->password       = Hash::make($request->password);
+            $target           = new User;
+            $target->name     = $request->name;
+            $target->email    = $request->email;
+            $target->password = Hash::make($request->password);
             if ($target->save()) {
                 Session::flash('success', "Admin Created Successfully!");
                 return redirect('admin');
@@ -78,7 +76,7 @@ class AdminController extends Controller
             ], 500);
         }
     }
-    
+
     public function adminEdit(Request $request, $id)
     {
         $target = User::where('id', $id)->first();
@@ -89,8 +87,8 @@ class AdminController extends Controller
     {
         try {
             $validate = Validator::make(request()->all(), [
-                'name'   => 'required|regex:/^[a-zA-Z-. ]+$/u',
-                'email'  => 'required|email:rfc,dns|unique:users,id,' . $request->id,
+                'name'  => 'required|regex:/^[a-zA-Z-. ]+$/u',
+                'email' => 'required|email:rfc,dns|unique:users,id,' . $request->id,
             ]);
 
             if ($validate->fails()) {
@@ -116,15 +114,19 @@ class AdminController extends Controller
             ], 500);
         }
     }
+    //End::admin mgt
 
-
-
-
-
+    //Start::Claims mgt
     public function employeeClaim(Request $request)
     {
-        $EmployeeClaim    = EmployeeClaim::get();
+        $EmployeeClaim = EmployeeClaim::get();
         return view('admin.employeeClaim')->with(compact('EmployeeClaim'));
+    }
+
+    public function employeeClaimShow(Request $request, $id)
+    {
+        $employeeClaim = EmployeeClaim::where('id', $id)->first();
+        return view('admin.employeeClaimShow')->with(compact('employeeClaim'));
     }
 
     public function employeeClaimDestroy(Request $request, $id)
@@ -143,11 +145,16 @@ class AdminController extends Controller
         return redirect('/admin-employee-claim');
     }
 
-    
     public function homeClaim(Request $request)
     {
-        $HomeClaim    = HomeClaim::get();
+        $HomeClaim = HomeClaim::get();
         return view('admin.homeClaim')->with(compact('HomeClaim'));
+    }
+
+    public function homeClaimShow(Request $request, $id)
+    {
+        $homeClaim = HomeClaim::where('id', $id)->first();
+        return view('admin.homeClaimShow')->with(compact('homeClaim'));
     }
 
     public function homeClaimDestroy(Request $request, $id)
@@ -166,11 +173,16 @@ class AdminController extends Controller
         return redirect('/admin-home-claim');
     }
 
-
     public function offShopClaim(Request $request)
     {
-        $OfficeShopClaim    = OfficeShopClaim::get();
+        $OfficeShopClaim = OfficeShopClaim::get();
         return view('admin.offShopClaim')->with(compact('OfficeShopClaim'));
+    }
+
+    public function offShopClaimShow(Request $request, $id)
+    {
+        $offShopClaim = OfficeShopClaim::where('id', $id)->first();
+        return view('admin.offShopClaimShow')->with(compact('offShopClaim'));
     }
 
     public function officeClaimDestroy(Request $request, $id)
@@ -188,5 +200,6 @@ class AdminController extends Controller
         }
         return redirect('/admin-off-shop-claim');
     }
+    //End::Claims mgt
 
 }

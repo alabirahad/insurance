@@ -239,7 +239,6 @@
                                     in case of theft or burglary loss? </div>
                                 <div class="col-md-5">
                                     <input type="radio" name="claim_q1" value="yes"> Yes, please state how did the culprit(s)
-                                    enter the premises.
                                     enter the premises. <br>
                                     <textarea name="claim_q1_description" rows="4" class=""></textarea><br>
                                     <span class="text-danger">{{ $errors->first('claim_q1_description') }}</span>

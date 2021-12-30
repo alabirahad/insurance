@@ -56,8 +56,13 @@ Route::get('/admin/{id}/edit', [AdminController::class, "adminEdit"]);
 Route::post('/admin/{id}/update', [AdminController::class, "adminUpdate"]);
 
 Route::delete('/admin-employee-claim/{id}', [AdminController::class, "employeeClaimDestroy"]);
-Route::delete('/admin-home-claim/{id}', [AdminController::class, "homeClaimDestroy"]);
-Route::delete('/admin-off-shop-claim/{id}', [AdminController::class, "officeClaimDestroy"]);
 Route::get('/admin-employee-claim', [AdminController::class, "employeeClaim"]);
+Route::get('/admin-employee-claim/{id}/show', [AdminController::class, "employeeClaimShow"]);
+
 Route::get('/admin-home-claim', [AdminController::class, "homeClaim"]);
+Route::get('/admin-home-claim/{id}/show', [AdminController::class, "homeClaimShow"]);
+Route::delete('/admin-home-claim/{id}', [AdminController::class, "homeClaimDestroy"]);
+
 Route::get('/admin-off-shop-claim', [AdminController::class, "offShopClaim"]);
+Route::get('/admin-off-shop-claim/{id}/show', [AdminController::class, "offShopClaimShow"]);
+Route::delete('/admin-off-shop-claim/{id}', [AdminController::class, "officeClaimDestroy"]);

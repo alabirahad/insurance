@@ -54,7 +54,7 @@ if (!empty($ses_msg)) {
                             <form action="{{ URL::to('admin-employee-claim/' . $data->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                                <button type="button" class="table-action edit-btn">Edit</button>
+                                <a href="{{ URL::to('admin-employee-claim/' . $data->id . '/show') }}" class="table-action edit-btn">Show</a>
                                 <button type="submit" class="table-action delete-btn">Delete</button>
                             </form>
                         </td>

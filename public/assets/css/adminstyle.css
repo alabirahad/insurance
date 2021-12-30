@@ -341,3 +341,18 @@ input[type="radio"] {
     background-color: #E11F27;
     color: white;
 }
+a.edit-btn{
+    padding: 6px 15px;
+}
+.details {
+    padding: 15px;
+    margin: 15px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.aplicant-details{
+    padding: 15px;
+}
+.question-description {
+    border: 1px solid;
+    padding: 10px;
+}
